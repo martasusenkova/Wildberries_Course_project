@@ -8,9 +8,19 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser,
     },
-    plugins: {
-      js,
+    plugins: { js },
+    extends: ["js/recommended", "prettier"],
+    rules: {
+      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "no-console": "warn",
+      eqeqeq: ["error", "always"],
+      curly: "error",
+      "prefer-const": "error",
+      "arrow-spacing": ["error", { before: true, after: true }],
+      "object-curly-spacing": ["error", "always"],
+      semi: ["error", "always"],
+      quotes: ["error", "single", { avoidEscape: true }],
+      "comma-dangle": ["error", "only-multiline"],
     },
-    extends: ["js/recommended"],
   },
 ]);
