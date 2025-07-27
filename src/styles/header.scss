@@ -1,0 +1,110 @@
+header {
+    min-width: 80px;
+    background: linear-gradient(90deg, #ED3CCA, #7C1AF8);
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    padding: 10px;
+    justify-content: space-between;
+    width: 100%;
+    position: sticky;
+    top: 0;
+}
+
+.logoHeader {
+    background-image: url(../images/logoWb.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 50px;
+    width: 260px;
+    display: none;
+}
+
+.searchInput {
+    height: 40px;
+    width: 100%;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 15px;
+}
+
+.btnBasket {
+    display: none;
+    height: 40px;
+    background-color: transparent;
+    background-image: url(../images/basket.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-top: 40px;
+    color: #ffffff99;
+}
+
+.btnBasket:hover {
+    color: #ffffff;
+}
+
+.tabBar {
+    min-width: 80px;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffffff;
+    height: 50px;
+    padding: 15px;
+
+    &__home {
+        width: 50px;
+        background-color: transparent;
+        background-image: url(../images/home-gray.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        &:hover {
+            background-image: url(../images/home-hover.svg);
+        }
+    }
+
+    &__basket {
+        width: 50px;
+        background-color: transparent;
+        background-image: url(../images/basket-gray.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        &:hover {
+            background-image: url(../images/basket-hover.svg);
+        }
+    }
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 1024px) {
+    header {
+        height: 115px;
+        padding: 20px;
+    }
+
+    .searchInput {
+        height: 60px;
+        font-size: 18px;
+    }
+
+    .logoHeader {
+        display: block;
+    }
+
+    .btnBasket {
+        display: block;
+    }
+
+    .tabBar {
+        display: none;
+    }
+}
