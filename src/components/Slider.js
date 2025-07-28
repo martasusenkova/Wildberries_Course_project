@@ -29,7 +29,7 @@ export function createSlider() {
   let currentIndex = 1;
 
   function getResponsiveImages() {
-    return window.innerWidth <= 992 ? imagesMedium : imagesBig;
+    return window.innerWidth <= 768 ? imagesMedium : imagesBig;
   }
 
   //  Создание слайда
