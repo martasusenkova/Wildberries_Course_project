@@ -1,9 +1,8 @@
-import { root } from "../main";
-
+// создание header
 export function createHeader() {
   const header = document.createElement('header');
   const logo = document.createElement('a');
-  logo.classList.add('logoHeader')
+  logo.classList.add('logoHeader');
   const inputSearch = document.createElement('input');
   inputSearch.classList.add('searchInput');
   inputSearch.placeholder = 'Найти на Wildberries';
@@ -14,9 +13,10 @@ export function createHeader() {
   header.append(logo);
   header.append(inputSearch);
   header.append(btnBasket);
-  root.append(header);
+  return header;
 }
 
+//создание tabBar
 export function createTabBar() {
   const tabBar = document.createElement('div');
   tabBar.classList.add('tabBar');
@@ -27,5 +27,5 @@ export function createTabBar() {
 
   tabBar.append(btnHome);
   tabBar.append(btnBasketTab);
-  root.append(tabBar);
+  return tabBar;
 }
