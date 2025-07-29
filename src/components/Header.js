@@ -2,12 +2,12 @@
 export function createHeader() {
   const header = document.createElement('header');
   const logo = document.createElement('a');
-  logo.classList.add('logoHeader');
+  logo.classList.add('header__logo');
   const inputSearch = document.createElement('input');
-  inputSearch.classList.add('searchInput');
+  inputSearch.classList.add('header__searchInput');
   inputSearch.placeholder = 'Найти на Wildberries';
   const btnBasket = document.createElement('button');
-  btnBasket.classList.add('btnBasket');
+  btnBasket.classList.add('header__btnBasket');
   btnBasket.innerHTML = 'Корзина';
 
   header.append(logo);

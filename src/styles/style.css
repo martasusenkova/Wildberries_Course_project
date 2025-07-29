@@ -47,8 +47,7 @@ header {
   position: sticky;
   top: 0;
 }
-
-.logoHeader {
+header__logo {
   background-image: url(../assets/header-tab-svg/logoWb.svg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -57,16 +56,14 @@ header {
   width: 260px;
   display: none;
 }
-
-.searchInput {
+header__searchInput {
   height: 40px;
   width: 100%;
   padding: 15px;
   font-size: 15px;
   border-radius: 15px;
 }
-
-.btnBasket {
+header__btnBasket {
   display: none;
   height: 40px;
   background-color: transparent;
@@ -77,8 +74,38 @@ header {
   padding-top: 40px;
   color: rgba(255, 255, 255, 0.6);
 }
+header__btnBasket:hover {
+  color: #ffffff;
+}
 
-.btnBasket:hover {
+.header__logo {
+  background-image: url(../assets/header-tab-svg/logoWb.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 50px;
+  width: 260px;
+  display: none;
+}
+.header__searchInput {
+  height: 40px;
+  width: 100%;
+  padding: 15px;
+  font-size: 15px;
+  border-radius: 15px;
+}
+.header__btnBasket {
+  display: none;
+  height: 40px;
+  background-color: transparent;
+  background-image: url(../assets/header-tab-svg/basket.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-top: 40px;
+  color: rgba(255, 255, 255, 0.6);
+}
+.header__btnBasket:hover {
   color: #ffffff;
 }
 
@@ -121,14 +148,14 @@ header {
     height: 115px;
     padding: 20px;
   }
-  .searchInput {
+  .header__searchInput {
     height: 60px;
     font-size: 18px;
   }
-  .logoHeader {
+  .header__logo {
     display: block;
   }
-  .btnBasket {
+  .header__btnBasket {
     display: block;
   }
   .tabBar {

@@ -9,41 +9,79 @@ header {
     width: 100%;
     position: sticky;
     top: 0;
+
+    &__logo {
+        background-image: url(../assets/header-tab-svg/logoWb.svg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 50px;
+        width: 260px;
+        display: none;
+    }
+
+    &__searchInput {
+        height: 40px;
+        width: 100%;
+        padding: 15px;
+        font-size: 15px;
+        border-radius: 15px;
+    }
+
+    &__btnBasket {
+        display: none;
+        height: 40px;
+        background-color: transparent;
+        background-image: url(../assets/header-tab-svg/basket.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding-top: 40px;
+        color: #ffffff99;
+
+        &:hover {
+            color: #ffffff;
+        }
+    }
 }
 
-.logoHeader {
-    background-image: url(../assets/header-tab-svg/logoWb.svg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 50px;
-    width: 260px;
-    display: none;
+.header {
+    &__logo {
+        background-image: url(../assets/header-tab-svg/logoWb.svg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 50px;
+        width: 260px;
+        display: none;
+    }
+
+    &__searchInput {
+        height: 40px;
+        width: 100%;
+        padding: 15px;
+        font-size: 15px;
+        border-radius: 15px;
+    }
+
+    &__btnBasket {
+        display: none;
+        height: 40px;
+        background-color: transparent;
+        background-image: url(../assets/header-tab-svg/basket.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding-top: 40px;
+        color: #ffffff99;
+
+        &:hover {
+            color: #ffffff;
+        }
+    }
 }
 
-.searchInput {
-    height: 40px;
-    width: 100%;
-    padding: 15px;
-    font-size: 15px;
-    border-radius: 15px;
-}
 
-.btnBasket {
-    display: none;
-    height: 40px;
-    background-color: transparent;
-    background-image: url(../assets/header-tab-svg/basket.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    padding-top: 40px;
-    color: #ffffff99;
-}
-
-.btnBasket:hover {
-    color: #ffffff;
-}
 
 .tabBar {
     min-width: 80px;
@@ -63,6 +101,7 @@ header {
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
+
         &:hover {
             background-image: url(../assets/header-tab-svg/home-hover.svg);
         }
@@ -75,14 +114,11 @@ header {
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
+
         &:hover {
             background-image: url(../assets/header-tab-svg/basket-hover.svg);
         }
     }
-}
-
-@media (min-width: 768px) {
-
 }
 
 @media (min-width: 1024px) {
@@ -91,17 +127,19 @@ header {
         padding: 20px;
     }
 
-    .searchInput {
-        height: 60px;
-        font-size: 18px;
-    }
+    .header {
+        &__searchInput {
+            height: 60px;
+            font-size: 18px;
+        }
 
-    .logoHeader {
-        display: block;
-    }
+        &__logo {
+            display: block;
+        }
 
-    .btnBasket {
-        display: block;
+        &__btnBasket {
+            display: block;
+        }
     }
 
     .tabBar {
