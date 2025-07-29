@@ -3,9 +3,9 @@ import "./styles/slider.scss";
 import "./components/Slider.js";
 import { createSlider } from "./components/Slider.js";
 
-const app = document.querySelector("#app");
+const app = document.getElementById("app");
 
 document.addEventListener("DOMContentLoaded", () => {
   const slider = createSlider();
-  document.querySelector("#app").appendChild(slider);
+  app.appendChild(slider);
 });

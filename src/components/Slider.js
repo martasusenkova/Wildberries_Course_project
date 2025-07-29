@@ -17,6 +17,7 @@ export function createSlider() {
     "src/assets/slider_images/slider6_big.webp",
   ];
   const imagesMedium = [
+    "src/assets/slider_images/slider1_medium.webp",
     "src/assets/slider_images/slider2_medium.webp",
     "src/assets/slider_images/slider3_medium.webp",
     "src/assets/slider_images/slider4_medium.webp",

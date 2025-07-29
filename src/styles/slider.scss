@@ -57,6 +57,15 @@
     pointer-events: auto;
   }
 }
+
+@media (min-width: 769px) {
+  .slider {
+    max-width: 1400px;
+  }
+  .slider__item img {
+    height: 170px;
+  }
+}
 // pagination
 .slider__pagination {
   position: absolute;
