@@ -3,6 +3,7 @@ export function createHeader() {
   const header = document.createElement('header');
   const logo = document.createElement('a');
   logo.classList.add('header__logo');
+  logo.href = '#app';
   const inputSearch = document.createElement('input');
   inputSearch.classList.add('header__searchInput');
   inputSearch.placeholder = 'Найти на Wildberries';
@@ -20,8 +21,9 @@ export function createHeader() {
 export function createTabBar() {
   const tabBar = document.createElement('div');
   tabBar.classList.add('tabBar');
-  const btnHome = document.createElement('button');
+  const btnHome = document.createElement('a');
   btnHome.classList.add('tabBar__home');
+  btnHome.href = '#app';
   const btnBasketTab = document.createElement('button');
   btnBasketTab.classList.add('tabBar__basket');
 
