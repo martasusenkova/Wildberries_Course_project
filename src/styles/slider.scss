@@ -1,3 +1,5 @@
+@import "./styles/style.css";
+
 .slider {
   position: relative;
   width: 100%;
@@ -34,7 +36,7 @@
     padding: 4px 10px;
     font-size: 18px;
     background-color: #e9f4d5;
-    color: #6f2dbd;
+    color: $wb-purple-primary;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -81,7 +83,7 @@
     transition: background 0.3s;
 
     &.active {
-      background: #6f2dbd;
+      background: $wb-purple-primary;
     }
   }
 }
