@@ -26,7 +26,7 @@ export function createCard(products) {
       card.classList.add("card");
 
       card.innerHTML = `<img src= ${image} class ="card__image"/> <p class="card__sale"> -10% </p> 
-<div class="card__price"><p class="card__initailPrice">${initailPrice}</p> <p class="card__finalPrice">${finalPrice}</p> </div> <p class="card__name">${name}</p>`;
+<div class="card__price"> <p class="card__finalPrice">${finalPrice}</p> <p class="card__initailPrice">${initailPrice}</p> </div> <p class="card__name">${name}</p>`;
       const cardButton = document.createElement("button");
       cardButton.classList.add("card__button");
       card.appendChild(cardButton);
@@ -35,7 +35,7 @@ export function createCard(products) {
       card.appendChild(cardShowButton);
       cardShowButton.innerText = "Быстрый просмотр";
       cardButton.innerHTML =
-        '<svg enable-background="new 0 0 64 64" height="64px" id="Layer_1" version="1.1" viewBox="0 0 64 64" width="64px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="M23.734,28.125c1.104,0,2-0.896,2-2v-7.8c0-3.487,2.837-6.325,6.324-6.325c3.487,0,6.325,2.838,6.325,6.325v7.8   c0,1.104,0.895,2,2,2c1.104,0,2-0.896,2-2v-7.8C42.384,12.632,37.752,8,32.058,8c-5.692,0-10.324,4.632-10.324,10.325v7.8   C21.734,27.229,22.63,28.125,23.734,28.125z"/><path d="M55,23.631H44.384v2.494c0,2.206-1.794,4-4,4s-4-1.794-4-4v-2.494h-8.649v2.494c0,2.206-1.794,4-4,4s-4-1.794-4-4v-2.494H9   c-0.552,0-0.893,0.435-0.762,0.971l6.998,28.497C15.658,54.701,17.344,56,19,56h26c1.658,0,3.342-1.299,3.766-2.901l6.996-28.497   C55.893,24.065,55.553,23.631,55,23.631z"/></g></svg> <p>Корзина</p>';
+        '<svg class="card__icon" width="17" height="16" fill="#A73AFD" xmlns="http://www.w3.org/2000/svg"> <path class="card__icon-path" d="M2.925.488a.833.833 0 0 0-1.517.691l4.295 9.416v.001c.005.008.023.05.046.09a.9.9 0 0 0 .979.446c.045-.01.089-.023.098-.026l6.22-1.853.105-.031c.44-.13.867-.256 1.201-.523.29-.232.517-.535.657-.88.16-.396.159-.842.158-1.3V4.105c0-.01 0-.06-.004-.11a.901.901 0 0 0-.488-.73.9.9 0 0 0-.447-.098H4.147L2.925.487ZM11.833 12a1.333 1.333 0 0 0 0 2.667h.007a1.333 1.333 0 0 0 0-2.667h-.007ZM3.167 13.334c0-.737.597-1.334 1.333-1.334h.007a1.333 1.333 0 0 1 0 2.667H4.5a1.333 1.333 0 0 1-1.333-1.333Z" fill="#A73AFD"/></svg> <p>Корзина</p>'
       container.appendChild(card);
     });
   }
