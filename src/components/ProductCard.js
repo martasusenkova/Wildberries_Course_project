@@ -1,4 +1,4 @@
-import { OpenModalWindow } from "./ProductCardModal.js";
+import { openModalWindow } from "./ProductCardModal.js";
 export function ProductCard() {
   console.log("Карточка товара");
   const container = document.createElement("div")

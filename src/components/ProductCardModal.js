@@ -1,6 +1,6 @@
 export function openModalWindow(cardId) {
     const modalElements = document.getElementsByClassName("modal-content");
-    if (modalElements.length === 0) { ModalWindow(); } else { modalElements[0].classList.add('active'); }
+    if (modalElements.length === 0) { modalWindow(); } else { modalElements[0].classList.add('active'); }
     document.addEventListener('mousedown', onDocumentClick);
 }
 export function modalWindow(cardId) {
