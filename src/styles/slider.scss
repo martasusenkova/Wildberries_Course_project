@@ -1,4 +1,4 @@
-@import "./styles/style.css";
+@use "../styles/style" as *;
 
 .slider {
   position: relative;

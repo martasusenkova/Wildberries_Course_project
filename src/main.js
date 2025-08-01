@@ -1,4 +1,4 @@
-import "./styles/style.css";
+import "./styles/style.scss";
 import "./styles/slider.scss";
 import "./components/Slider.js";
 import { createSlider } from "./components/Slider.js";
