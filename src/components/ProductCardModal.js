@@ -1,11 +1,11 @@
-export function OpenModalWindow(cardId) {
+export function openModalWindow(cardId) {
     const modalElements = document.getElementsByClassName("modal-content");
     if (modalElements.length === 0) { ModalWindow(); } else { modalElements[0].classList.add('active'); }
     document.addEventListener('mousedown', onDocumentClick);
 }
-export function ModalWindow() {
+export function modalWindow(cardId) {
     console.log("ModalWindow");
-    const productCardEntity = findCard("")
+    const productCardEntity = findCard(cardId)
     // Создаём карточку товара
     const modalContent = document.createElement('div');
     modalContent.className = 'modal-content';

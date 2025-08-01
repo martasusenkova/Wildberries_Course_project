@@ -14,6 +14,6 @@ export function ProductCard() {
   card.appendChild(cardShowButton)
   cardShowButton.innerText = 'Быстрый просмотр';
   cardShowButton.onclick = function () {
-      OpenModalWindow("");
+      openModalWindow("");
   }
 }
