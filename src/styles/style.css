@@ -40,7 +40,8 @@ header {
   background: linear-gradient(90deg, #ED3CCA, #7C1AF8);
   display: flex;
   align-items: center;
-  column-gap: 20px;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
   padding: 10px;
   justify-content: space-between;
   width: 100%;
@@ -163,8 +164,6 @@ header__btnBasket:hover {
   }
 }
 body {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #212121;
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
