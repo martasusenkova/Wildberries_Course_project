@@ -1,6 +1,4 @@
-export function ProductCard() {
-  console.log("Карточка товара");
-}
+import { openModalWindow } from "./ProductCardModal.js";
 export const product = {
   name: "Кроссовки",
   image:
