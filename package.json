@@ -8,9 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint .",
- "sass": "sass src/styles/style.scss src/styles/style.css",
-"sass:watch": "sass --watch src/styles/style.scss:src/styles/style.css"
-
+    "sass": "sass src/styles/style.scss src/styles/style.css",
+    "sass:watch": "sass --watch src/styles/style.scss:src/styles/style.css"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
@@ -20,6 +19,7 @@
     "eslint-plugin-import": "^2.32.0",
     "globals": "^16.3.0",
     "sass": "^1.89.2",
+    "sass-embedded": "^1.89.2",
     "vite": "^7.0.4"
   }
 }
