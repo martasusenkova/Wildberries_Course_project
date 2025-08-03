@@ -80,19 +80,27 @@
   font-weight: 500;
   font-size: 16px;
 }
-.card__button:active {
-  background-color: #9973c4;
+.card__button-two {
+  background-color: #eedcea;
+  color: #6F2DBD;
+  font-weight: 800;
 }
 .card__show-button {
-  opacity: 2;
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 16px;
+  opacity: 0;
   color: black;
   position: relative;
   top: -200px;
-  right: -100px;
   z-index: 5;
+  padding: 7px 5px 5px;
+  border: none;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  font-family: Roboto;
+  font-weight: 300;
+  font-size: 16px;
 }
 .card__icon {
   fill: white;
