@@ -1,6 +1,10 @@
 import { ProductCard } from "./components/ProductCard.js";
-import { Header } from "./components/Header.js";
-import "./styles/style.css";
+import { createHeader, createTabBar } from "./components/Header.js";
+
+export const app = document.getElementById('app')
+const header = createHeader();
+const tabBar = createTabBar();
+app.append(header);
+app.append(tabBar);
 
 ProductCard();
-Header();
