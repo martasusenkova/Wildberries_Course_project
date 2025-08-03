@@ -1,0 +1,111 @@
+.modal-content {
+  background-color: #fff;
+  margin: 30px auto;
+  padding: 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  max-width: 800px;
+}
+.modal-content__close-button {
+  color: #9d9da5;
+  position: absolute;
+  top: 0px;
+  right: 18px;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.modal-content__close-button:hover {
+  color: #000;
+}
+.modal-content__product-card {
+  display: flex;
+  justify-content: center;
+}
+.modal-content__product-card__content {
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.modal-content__product-card__content__info {
+  margin-bottom: 60px;
+}
+.modal-content__product-card__content__info__title {
+  font-size: 22px;
+  text-overflow: ellipsis;
+  margin: 0 0 8px 0;
+  color: #222;
+}
+.modal-content__product-card__content__info__brand {
+  color: #888;
+  margin-bottom: 8px;
+}
+.modal-content__product-card__content__info__final-price {
+  font-size: 24px;
+  color: #ff4444;
+  margin-bottom: 18px;
+}
+.modal-content__product-card__content__info__price {
+  font-size: 14px;
+  text-decoration: line-through;
+  color: #868695;
+  margin-bottom: 18px;
+}
+.modal-content__product-card__content__info__buttons {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  max-width: 360px;
+}
+.modal-content__product-card__content__info__buttons__buy-button {
+  background: rgba(167, 58, 253, 0.1215686275);
+  color: #a73afd;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 32px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modal-content__product-card__content__info__buttons__buy-button:hover {
+  background: rgba(167, 58, 253, 0.12);
+}
+.modal-content__product-card__content__info__buttons__basket-button {
+  background: rgba(167, 58, 253, 0.9);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 32px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modal-content__product-card__content__info__buttons__basket-button:hover {
+  background: #a73afd;
+}
+.modal-content__product-card__content__info-button {
+  padding: 20px 0;
+  font-size: 18px;
+  cursor: pointer;
+  text-align: center;
+}
+.modal-content__product-card__content__info-button:hover {
+  color: #7000b8;
+}
+.modal-content__product-card__product-img {
+  width: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 8px 0 0 8px;
+}
+
+.modal-content.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}/*# sourceMappingURL=product-info-modal.css.map */

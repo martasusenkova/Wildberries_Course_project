@@ -1,25 +1,15 @@
-<<<<<<< HEAD
 @forward "reset";
 @forward "header";
-
-=======
-@use 'product-info-modal';
->>>>>>> 123d37d2fb899384a415af6c9128d28fd73a112d
+@use "product-info-modal";
 // Основные цвета Wildberries
 $wb-purple-primary: #6f2dbd; // Логотип, кнопки "Купить", важные акценты
 $wb-purple-secondary: #8a4fff; // Фон верхнего меню, подложки, иконки
 $wb-white: #ffffff; // Основной фон сайта, текст на тёмном фоне
 $wb-black-text: #212121; // Основной цвет текста, заголовки
-<<<<<<< HEAD
 $wb-light-gray: #f4f4f4; // Фон карточек товаров, границы, разделители
 $wb-alert-red: #ff3b30; // Ошибки, уведомления, предупреждения
 
-=======
-$wb-light-gray: #F4F4F4; // Фон карточек товаров, границы, разделители
-$wb-alert-red: #FF3B30; // Ошибки, уведомления, предупреждения
->>>>>>> 123d37d2fb899384a415af6c9128d28fd73a112d
 body {
   background-color: $wb-white; // фон страницы — белый
   color: $wb-black-text; // цвет текста — тёмно-серый
 }
-
