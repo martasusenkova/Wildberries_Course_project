@@ -1,11 +1,14 @@
+import { createHeader, createTabBar } from "./components/Header.js";
+import { createSlider } from "./components/Slider.js";
+
 import "./styles/style.scss";
 import "./styles/slider.scss";
 import "./components/Slider.js";
-import { createSlider } from "./components/Slider.js";
-
-const app = document.getElementById("app");
+export const app = document.getElementById("app");
 
 document.addEventListener("DOMContentLoaded", () => {
+  const header = createHeader();
+  const tabBar = createTabBar();
   const slider = createSlider();
-  app.appendChild(slider);
+  app.append(header, tabBar, slider);
 });
