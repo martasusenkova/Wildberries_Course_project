@@ -5,7 +5,7 @@ header {
     align-items: center;
     column-gap: 20px;
     padding: 10px;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     position: sticky;
     top: 0;
@@ -46,6 +46,17 @@ header {
 }
 
 .header {
+    &__wrapper {
+        width: 100%;
+        height: 100%;
+        max-width: 1504px;
+        display: flex;
+        padding: 0 16px;
+        align-items: center;
+        column-gap: 20px;
+        justify-content: space-between;
+    }
+
     &__logo {
         background-image: url(../assets/header-tab-svg/logoWb.svg);
         background-size: cover;
@@ -80,8 +91,6 @@ header {
         }
     }
 }
-
-
 
 .tabBar {
     min-width: 80px;
@@ -128,6 +137,11 @@ header {
     }
 
     .header {
+        &__wrapper {
+            max-width: 1504px;
+            padding: 0 32px;
+        }
+
         &__searchInput {
             height: 60px;
             font-size: 18px;
