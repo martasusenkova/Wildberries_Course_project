@@ -1,7 +1,10 @@
 import { getCard } from "../js/utils";
 export function openModalWindow(cardId) {
-    const modalElements = document.getElementsByClassName("modal-content");
-    if (modalElements.length === 0) { modalWindow(cardId); } else { modalElements[0].classList.add('active'); }
+    const modalContainer = document.querySelector('.modal-content');
+    if (modalContainer) {
+        modalContainer.remove();
+    }
+    modalWindow(cardId)
     document.addEventListener('mousedown', onDocumentClick);
 }
 export function modalWindow(cardId) {

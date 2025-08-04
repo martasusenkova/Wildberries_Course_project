@@ -29,7 +29,6 @@ export function createCard(products) {
   container.addEventListener('click', function (event) {
     if (event.target.classList.contains('card__show-button')) {
       const cardId = event.target.dataset.id
-            console.log(cardId)
       openModalWindow(cardId)
     }
   });
