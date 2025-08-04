@@ -1,4 +1,12 @@
 export function getProductCards () {
+  loadProductCards();
+if (localStorage.getItem('cards') != null) {
+  return JSON.parse(localStorage.getItem('cards'));
+} else {
+  return []
+}
+}
+function loadProductCards () {
     const url = 'https://6888970cadf0e59551ba8c1c.mockapi.io/api/cards';
 fetch(url)
   .then(response => {
