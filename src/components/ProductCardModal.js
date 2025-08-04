@@ -1,11 +1,11 @@
+import { getCard } from "../js/utils";
 export function openModalWindow(cardId) {
     const modalElements = document.getElementsByClassName("modal-content");
-    if (modalElements.length === 0) { modalWindow(); } else { modalElements[0].classList.add('active'); }
+    if (modalElements.length === 0) { modalWindow(cardId); } else { modalElements[0].classList.add('active'); }
     document.addEventListener('mousedown', onDocumentClick);
 }
 export function modalWindow(cardId) {
-    console.log("ModalWindow");
-    const productCardEntity = findCard(cardId)
+    const productCardEntity = getCard(cardId)
     // Создаём карточку товара
     const modalContent = document.createElement('div');
     modalContent.className = 'modal-content';
@@ -83,10 +83,6 @@ export function modalWindow(cardId) {
     const app = document.getElementById('app');
     app.appendChild(modalContent);
     modalContent.classList.add('active');
-}
-function findCard(cardId) {
-    const arrCards = JSON.parse(localStorage.getItem('cards'));
-    return arrCards[1];
 }
 function onDocumentClick(e) {
     // Если клик был вне modalContent
