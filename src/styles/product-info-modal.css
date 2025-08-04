@@ -109,4 +109,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.card__button-two {
+  background-color: #eedcea;
+  color: #6f2dbd;
+  font-weight: 800;
 }/*# sourceMappingURL=product-info-modal.css.map */
