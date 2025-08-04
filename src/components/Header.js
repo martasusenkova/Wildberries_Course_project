@@ -1,6 +1,9 @@
 // создание header
 export function createHeader() {
   const header = document.createElement('header');
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('header__wrapper');
+
   const logo = document.createElement('a');
   logo.classList.add('header__logo');
   logo.href = '#app';
@@ -11,9 +14,10 @@ export function createHeader() {
   btnBasket.classList.add('header__btnBasket');
   btnBasket.innerHTML = 'Корзина';
 
-  header.append(logo);
-  header.append(inputSearch);
-  header.append(btnBasket);
+  wrapper.append(logo);
+  wrapper.append(inputSearch);
+  wrapper.append(btnBasket);
+  header.append(wrapper)
   return header;
 }
 
