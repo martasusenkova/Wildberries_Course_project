@@ -1,4 +1,3 @@
-// export default products
 export function getProductCards () {
   loadProductCards();
 if (localStorage.getItem('cards') != null) {

@@ -12,7 +12,5 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabBar = createTabBar();
   const slider = createSlider();
   app.append(header, tabBar, slider);
-  // products = getProductCards();
-  // console.log(products);
- createCard(getProductCards());
+  createCard(getProductCards());
 });
