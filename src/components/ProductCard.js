@@ -13,7 +13,7 @@ export function createCard(products) {
     card.classList.add("card");
     // card.setAttribute('data-id', product.id);
     card.innerHTML = `<img src= ${product.image} class ="card__image"/> <p class="card__sale"> -10% </p> 
-<div class="card__price"> <p class="card__finalPrice">${product.finalPrice}</p> <p class="card__initailPrice">${product.price}</p> </div> <p class="card__name">${name}</p>`;
+<div class="card__price"> <p class="card__finalPrice">${product.finalPrice}</p> <p class="card__initailPrice">${product.price}</p> </div> <p class="card__name">${product.name}</p>`;
     const cardButton = document.createElement("button");
     cardButton.classList.add("card__button");
     card.appendChild(cardButton);
