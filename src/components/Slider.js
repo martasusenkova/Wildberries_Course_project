@@ -53,13 +53,15 @@ export function createSlider() {
   images.forEach((src) => sliderTrack.appendChild(createSlide(src))); // оригинальные
   sliderTrack.appendChild(createSlide(images[0])); // first clone
 
+  // Ждём полной загрузки страницы (включая стили и изображения)
   window.addEventListener("load", () => {
+    // Ждём, пока всё отрисуется, затем устанавливаем позицию слайдера без анимации
     requestAnimationFrame(() => {
-      slideWidth = sliderWrapper.offsetWidth;
+      slideWidth = sliderWrapper.offsetWidth; // Получаем ширину одного слайда
       sliderTrack.style.transition = "none";
       sliderTrack.style.transform = `translateX(-${
         slideWidth * currentIndex
-      }px)`;
+      }px)`; // Сдвигаем слайдер на нужную позицию
     });
   });
 
@@ -158,17 +160,19 @@ export function createSlider() {
     sliderTrack.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
   });
 
+  // вызываем и передаем анонимные функции в качестве аргументов
   enableSliderDragging(
-    sliderTrack,
-    () => slideWidth,
-    () => currentIndex,
-    () => images.length,
-    goToSlide
+    sliderTrack, // 1. Элемент, который будем двигать мышкой (трек слайдов)
+    () => slideWidth, // 2. Функция, возвращающая ширину слайда
+    () => currentIndex, // 3. Функция, возвращающая текущий слайд (чтобы знать, где мы находимся)
+    () => images.length, // 4. Функция, возвращающая общее количество слайдов
+    goToSlide // 5. Функция, которая будет вызываться для перехода к нужному слайду
   );
 
   return sliderWrapper;
 }
 
+// даем имена выше написанным функциям
 export function enableSliderDragging(
   sliderTrack,
   getSlideWidth,
@@ -176,40 +180,45 @@ export function enableSliderDragging(
   getImagesLength,
   goToSlide
 ) {
-  let isDragging = false;
-  let startX = 0;
-  let moveX = 0;
-  let animationID;
-  let currentTranslate = 0;
-  let hasMoved = false;
-  const minMove = 5;
+  let isDragging = false; // проверка, тащит ли сейчас пользователь слайдер
+  let startX = 0; // начальная позиция по X (где началось перетаскивание)
+  let moveX = 0; // текущее смещение по X во время перетаскивания
+  let animationID; // ID анимации для отмены через cancelAnimationFrame
+  let currentTranslate = 0; // текущее смещение слайдера (в пикселях)
+  let hasMoved = false; // проверка, был ли реально сдвиг (чтобы не реагировать на клик)
+  const minMove = 5; // минимальное смещение, при котором слайдер двигается
+
+  // Получает позицию X мыши или пальца
   const getPositionX = (e) =>
     e.type.includes("mouse") ? e.pageX : e.touches[0].clientX;
 
   const animation = () => {
     if (isDragging) {
-      sliderTrack.style.transform = `translateX(${currentTranslate}px)`;
-      requestAnimationFrame(animation);
+      sliderTrack.style.transform = `translateX(${currentTranslate}px)`; // Смещаем слайдер в реальном времени на значение currentTranslate
+      requestAnimationFrame(animation); // Запрашиваем следующий кадр — цикл продолжается, пока тащим
     }
   };
 
   const touchStart = (e) => {
-    isDragging = true;
-    hasMoved = false;
-    startX = getPositionX(e);
-    sliderTrack.style.transition = "none";
+    isDragging = true; // включаем режим перетаскивания
+    hasMoved = false; // пока что слайдер не сдвигался
+    startX = getPositionX(e); // запоминаем начальную позицию нажатия
+    sliderTrack.style.transition = "none"; // отключаем плавность
   };
 
   const touchMove = (e) => {
-    if (!isDragging) return;
-    const currentPosition = getPositionX(e);
-    moveX = currentPosition - startX;
+    if (!isDragging) return; // если не двигали - ничего не делаем
+    const currentPosition = getPositionX(e); // получаем текущую позицию
+    moveX = currentPosition - startX; // вычисляем, насколько сдвинули
 
+    // если сдвиг больше порога (5px)
     if (Math.abs(moveX) > minMove) {
       if (!hasMoved) {
-        hasMoved = true;
-        animationID = requestAnimationFrame(animation);
+        hasMoved = true; // первый реальный сдвиг
+        animationID = requestAnimationFrame(animation); // запускаем анимацию движения
       }
+
+      // Вычисляем смещение: начальная позиция минус смещение
       currentTranslate = -getSlideWidth() * getCurrentIndex() + moveX;
     }
   };
@@ -219,8 +228,8 @@ export function enableSliderDragging(
     isDragging = false;
 
     let currentIndex = getCurrentIndex();
-    const slideWidth = getSlideWidth();
-    const threshold = slideWidth * 0.1;
+    const slideWidth = getSlideWidth(); //возвращает ширину одного слайда
+    const threshold = slideWidth * 0.1; // пороговое значение для сдвига слайда
 
     //  Если не тянули вообще — ничего не делай
     if (!hasMoved) {
@@ -229,33 +238,46 @@ export function enableSliderDragging(
       return;
     }
 
-    // Если тянули чуть-чуть — верни обратно
+    // Если сдвинули немного (меньше 5 пикселей), то просто верни слайд на место — это не движение, а клик
     if (Math.abs(moveX) < 5) {
-      goToSlide(getCurrentIndex()); // когда мы просто кликаем, а не тянем
+      goToSlide(getCurrentIndex());
       return;
     }
-    // Если достаточно тянули - перелестни
+    // Если сдвиг больше порогового значения (то есть пользователь потянул достаточно сильно)
     if (Math.abs(moveX) > threshold) {
-      if (moveX < 0 && currentIndex < getImagesLength()) {
-        currentIndex++;
-      } else if (moveX > 0 && currentIndex > 0) {
-        currentIndex--;
+      // Если потянули влево (moveX < 0) и не достигли последнего слайда
+      if (moveX < 0 && currentIndex < getImagesLength() + 1) {
+        currentIndex++; // Переходим к следующему слайду
+      }
+      // Если потянули вправо (moveX > 0) и не на первом слайде
+      else if (moveX > 0 && currentIndex > 0) {
+        currentIndex--; // Переходим к предыдущему слайду
       }
     }
 
-    goToSlide(currentIndex);
-    moveX = 0;
-    hasMoved = false;
+    goToSlide(currentIndex); // Переходим к слайду с обновлённым индексом
+
+    moveX = 0; // Сбрасываем смещение, чтобы подготовиться к следующему перетаскиванию
+
+    hasMoved = false; // Сбрасываем проверку движения
   };
 
-  sliderTrack.addEventListener("mousedown", touchStart);
-  sliderTrack.addEventListener("mousemove", touchMove);
+  sliderTrack.addEventListener("mousedown", touchStart); // Начинаем перетаскивание при нажатии мыши
+
+  sliderTrack.addEventListener("mousemove", touchMove); // Обновляем позицию слайдера при движении мыши
+
+  // Заканчиваем перетаскивание при отпускании мыши
   sliderTrack.addEventListener("mouseup", () => {
     if (isDragging) touchEnd();
   });
-  sliderTrack.addEventListener("mouseleave", () => isDragging && touchEnd());
 
-  sliderTrack.addEventListener("touchstart", touchStart, { passive: true });
-  sliderTrack.addEventListener("touchmove", touchMove, { passive: true });
-  sliderTrack.addEventListener("touchend", touchEnd);
+  sliderTrack.addEventListener("mouseleave", () => isDragging && touchEnd()); // Если мышь покидает область слайдера — тоже заканчиваем перетаскивание
+
+  // Обработчики касаний для мобильных устройств (тач-события)
+
+  sliderTrack.addEventListener("touchstart", touchStart, { passive: true }); // Начинаем перетаскивание пальцем
+
+  sliderTrack.addEventListener("touchmove", touchMove, { passive: true }); // Обновляем позицию слайдера при движении пальца
+
+  sliderTrack.addEventListener("touchend", touchEnd); // Заканчиваем перетаскивание пальцем
 }
