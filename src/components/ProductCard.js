@@ -1,7 +1,7 @@
 import { openModalWindow } from "./ProductCardModal.js";
 import { app } from "../main.js";
 import { toast } from "./toast.js";
-//import { showToast } from "./toast.js";
+import { showToast } from "./toast.js";
 
 export function createCard(products) {
   const container = document.createElement("div");
@@ -18,24 +18,15 @@ export function createCard(products) {
     const cardButton = document.createElement("button");
     cardButton.classList.add("card__button");
 
-    cardButton.addEventListener("click", () => changeText(cardButton), 
-     function showToast() {
-app.appendChild(toast); 
-setTimeout(() => {
-setTimeout(() => {
-    toast.classList.add("toast_show");
-    console.log("toast")
-  }, 300);
-  setTimeout(() => {
-    toast.style.display = 'none';
-  }, 500); // Скрываем через 5 секунд
-}, 100);
-});
-
     function changeText(cardButton) {
       cardButton.textContent = "В корзине!";
       cardButton.classList.add("card__button-two");
     }
+
+    cardButton.addEventListener("click", () => {
+      changeText(cardButton);
+      showToast();
+    });
 
     cardButton.innerHTML =
       '<svg class="card__icon" width="17" height="16" fill="#A73AFD" xmlns="http://www.w3.org/2000/svg"> <path class="card__icon-path" d="M2.925.488a.833.833 0 0 0-1.517.691l4.295 9.416v.001c.005.008.023.05.046.09a.9.9 0 0 0 .979.446c.045-.01.089-.023.098-.026l6.22-1.853.105-.031c.44-.13.867-.256 1.201-.523.29-.232.517-.535.657-.88.16-.396.159-.842.158-1.3V4.105c0-.01 0-.06-.004-.11a.901.901 0 0 0-.488-.73.9.9 0 0 0-.447-.098H4.147L2.925.487ZM11.833 12a1.333 1.333 0 0 0 0 2.667h.007a1.333 1.333 0 0 0 0-2.667h-.007ZM3.167 13.334c0-.737.597-1.334 1.333-1.334h.007a1.333 1.333 0 0 1 0 2.667H4.5a1.333 1.333 0 0 1-1.333-1.333Z" fill="#A73AFD"/></svg> <p>Корзина</p>';
