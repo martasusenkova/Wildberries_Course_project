@@ -1,5 +1,6 @@
 import { app } from "../main.js";
 import { getCard } from "../js/utils";
+//import { showToast } from "./toast.js";
 export function openModalWindow(cardId) {
   const modalContainer = document.querySelector(".modal-content");
   if (modalContainer) {
@@ -92,7 +93,7 @@ export function modalWindow(cardId) {
   app.appendChild(modalContent);
   modalContent.classList.add("active");
 
-  basketBtn.addEventListener("click", () => changeText(basketBtn));
+  basketBtn.addEventListener("click", () => changeText(basketBtn), showToast());
 
   function changeText(basketBtn) {
     basketBtn.textContent = "Перейти в корзину!";

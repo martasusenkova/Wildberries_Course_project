@@ -1,5 +1,7 @@
 import { openModalWindow } from "./ProductCardModal.js";
 import { app } from "../main.js";
+import { toast } from "./toast.js";
+//import { showToast } from "./toast.js";
 
 export function createCard(products) {
   const container = document.createElement("div");
@@ -16,7 +18,19 @@ export function createCard(products) {
     const cardButton = document.createElement("button");
     cardButton.classList.add("card__button");
 
-    cardButton.addEventListener("click", () => changeText(cardButton));
+    cardButton.addEventListener("click", () => changeText(cardButton), 
+     function showToast() {
+app.appendChild(toast); 
+setTimeout(() => {
+setTimeout(() => {
+    toast.classList.add("toast_show");
+    console.log("toast")
+  }, 300);
+  setTimeout(() => {
+    toast.style.display = 'none';
+  }, 500); // Скрываем через 5 секунд
+}, 100);
+});
 
     function changeText(cardButton) {
       cardButton.textContent = "В корзине!";
