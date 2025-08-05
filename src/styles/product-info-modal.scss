@@ -83,6 +83,7 @@
           }
           &__basket-button:hover {
             background: #a73afd;
+            color: white;
           }
         }
       }
@@ -107,4 +108,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.card__button-two {
+  background-color: #f7e5fc;
+  color: #aa4ccf;
+  font-weight: 800;
+}
+
+.card__button-two:hover {
+  background-color: #efe2ec;
+  color: #aa4ccf;
 }
