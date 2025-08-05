@@ -88,6 +88,7 @@
 }
 .modal-content__product-card__content__info__buttons__basket-button:hover {
   background: #a73afd;
+  color: white;
 }
 .modal-content__product-card__content__info-button {
   padding: 20px 0;
