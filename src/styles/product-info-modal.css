@@ -113,11 +113,12 @@
 }
 
 .card__button-two {
-  background-color: #eedcea;
-  color: #6f2dbd;
+  background-color: #f7e5fc;
+  color: #aa4ccf;
   font-weight: 800;
 }
 
 .card__button-two:hover {
-  color: white;
+  background-color: #efe2ec;
+  color: #aa4ccf;
 }/*# sourceMappingURL=product-info-modal.css.map */
