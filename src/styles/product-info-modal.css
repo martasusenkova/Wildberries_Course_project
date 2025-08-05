@@ -116,4 +116,8 @@
   background-color: #eedcea;
   color: #6f2dbd;
   font-weight: 800;
+}
+
+.card__button-two:hover {
+  color: white;
 }/*# sourceMappingURL=product-info-modal.css.map */
