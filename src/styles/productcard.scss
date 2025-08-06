@@ -8,6 +8,8 @@
   flex-direction: row;
 }
 .productContainer {
+  max-width: 1440px;
+  margin: 0 auto;
   grid-template-columns: repeat(2, calc(50% - 4px));
   grid-auto-flow: dense;
   gap: 8px;
@@ -127,7 +129,7 @@
     opacity: 0;
     color: black;
     position: relative;
-    top: -135px;
+    top: -152px;
     z-index: 5;
     padding: 7px 5px 5px;
     border: none;

@@ -12,11 +12,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-<<<<<<< HEAD
   overflow: hidden;
-=======
-  max-width: 800px;
->>>>>>> develop
 }
 .m-content__close-btn {
   color: #9d9da5;
@@ -119,10 +115,6 @@
 
 .m-content.active {
   display: flex;
-<<<<<<< HEAD
-=======
-  align-items: center;
-  justify-content: center;
 }
 
 .card__button-two {
@@ -134,5 +126,4 @@
 .card__button-two:hover {
   background-color: #efe2ec;
   color: #aa4ccf;
->>>>>>> develop
 }/*# sourceMappingURL=product-info-modal.css.map */

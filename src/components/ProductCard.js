@@ -32,9 +32,9 @@ export function createCard(products) {
     cardShowButton.innerText = "Быстрый просмотр";
     cardShowButton.setAttribute("data-id", product.id);
 
-    app.appendChild(container);
     card.append(cardButton, cardShowButton);
     container.appendChild(card);
+    app.appendChild(container);
   });
 
   container.addEventListener("click", function (event) {

@@ -1,16 +1,16 @@
 import { app } from "../main.js";
 import { getCard } from "../js/utils";
 export function openModalWindow(cardId) {
-    const modalContainer = document.querySelector('.m-content');
-    if (modalContainer) {
-        modalContainer.remove();
-    }
+  const modalContainer = document.querySelector(".m-content");
+  if (modalContainer) {
+    modalContainer.remove();
+  }
     const modOverlay = document.querySelector('.m-overlay');
     if (modOverlay) {
         modOverlay.remove();
     }
-    modalWindow(cardId)
-    document.addEventListener('mousedown', onDocumentClick);
+  modalWindow(cardId);
+  document.addEventListener("mousedown", onDocumentClick);
 }
 export function modalWindow(cardId) {
     const productCardEntity = getCard(cardId)
@@ -111,9 +111,11 @@ export function modalWindow(cardId) {
 }
 function onDocumentClick(e) {
     // Если клик был вне modalContent
-    const modalContent = document.querySelector('.modal-content');
-    if (modalContent && !modalContent.contains(e.target)) {
+    const modalContent = document.querySelector('.m-content');
+    const modOverlay = document.querySelector('.m-overlay')
+    if (modalContent && modOverlay && !modalContent.contains(e.target)) {
         modalContent.classList.remove('active');
+        modOverlay.classList.remove('active');
         document.removeEventListener('mousedown', onDocumentClick);
     }
 }
