@@ -1,8 +1,12 @@
 import { getCard } from "../js/utils";
 export function openModalWindow(cardId) {
-    const modalContainer = document.querySelector('.modal-content');
+    const modalContainer = document.querySelector('.m-content');
     if (modalContainer) {
         modalContainer.remove();
+    }
+    const modOverlay = document.querySelector('.m-overlay');
+    if (modOverlay) {
+        modOverlay.remove();
     }
     modalWindow(cardId)
     document.addEventListener('mousedown', onDocumentClick);
@@ -11,28 +15,32 @@ export function modalWindow(cardId) {
     const productCardEntity = getCard(cardId)
     // Создаём карточку товара
     const modalContent = document.createElement('div');
-    modalContent.className = 'modal-content';
-
+    modalContent.className = 'm-content';
+    const modOverlay = document.createElement('div');
+    modOverlay.className = 'm-overlay';
     const closeBtn = document.createElement('span');
-    closeBtn.className = 'modal-content__close-button';
+    closeBtn.className = 'm-content__close-btn';
     closeBtn.textContent = '×';
-    closeBtn.onclick = () => modalContent.classList.remove('active');
+    closeBtn.onclick = () => {
+        modalContent.classList.remove('active');
+        modOverlay.classList.remove('active');
+    }
 
     const productCard = document.createElement('div');
-    productCard.className = 'modal-content__product-card';
+    productCard.className = 'm-content__card';
 
     const productImg = document.createElement('img');
-    productImg.className = 'modal-content__product-card__product-img';
+    productImg.className = 'm-content__card__img';
     productImg.src = productCardEntity.image;
     productImg.alt = 'Товар';
 
     const productContent = document.createElement('div');
-    productContent.className = 'modal-content__product-card__content';
+    productContent.className = 'm-content__card__content';
 
     const productHeader = document.createElement('div');
-    productHeader.className = 'modal-content__product-card__content__header';
+    productHeader.className = 'm-content__card__content__header';
     const productTitle = document.createElement('h2');
-    productTitle.className = 'modal-content__product-card__content__header__title';
+    productTitle.className = 'm-content__card__content__header__title';
 
     const brandSpan = document.createElement('span');
     brandSpan.textContent = productCardEntity.brand;
@@ -45,27 +53,29 @@ export function modalWindow(cardId) {
     productTitle.appendChild(titleSpan);
 
     const productInfo = document.createElement('div');
-    productInfo.className = 'modal-content__product-card__content__info';
+    productInfo.className = 'm-content__card__content__info';
 
     const productPrice = document.createElement('p');
-    productPrice.className = 'modal-content__product-card__content__info__final-price';
+    productPrice.className = 'm-content__card__content__info__final-price';
     productPrice.textContent = productCardEntity.finalPrice + ' р. ';
     const priceSpan = document.createElement('span');
     priceSpan.textContent = productCardEntity.price + ' р.';
-    priceSpan.className = "modal-content__product-card__content__info__price"
+    priceSpan.className = "m-content__card__content__info__price"
     productPrice.appendChild(priceSpan);
 
     const buttons = document.createElement('div');
-    buttons.className = 'modal-content__product-card__content__info__buttons';
+    buttons.className = 'm-content__card__content__info__btns';
 
     const basketBtn = document.createElement('button');
-    basketBtn.className = 'modal-content__product-card__content__info__buttons__basket-button';
+    basketBtn.className = 'm-content__card__content__info__btns__basket';
     basketBtn.textContent = 'Добавить в корзину';
+    basketBtn.setAttribute('data-id', productCardEntity.id);
     const buyBtn = document.createElement('button');
-    buyBtn.className = 'modal-content__product-card__content__info__buttons__buy-button';
+    buyBtn.className = 'm-content__card__content__info__btns__buy';
     buyBtn.textContent = 'Купить сейчас';
+    buyBtn.setAttribute('data-id', productCardEntity.id);
     const infoBtn = document.createElement('a');
-    infoBtn.className = 'modal-content__product-card__content__info-button';
+    infoBtn.className = 'm-content__card__content__info-button';
     infoBtn.textContent = 'Больше информации о товаре';
 
     // Собираем
@@ -85,13 +95,18 @@ export function modalWindow(cardId) {
     modalContent.appendChild(productCard);
     const app = document.getElementById('app');
     app.appendChild(modalContent);
+    app.appendChild(modOverlay);
     modalContent.classList.add('active');
+    const modalOverlay = document.querySelector('.m-overlay')
+    modalOverlay.classList.add('active');
 }
 function onDocumentClick(e) {
     // Если клик был вне modalContent
-    const modalContent = document.querySelector('.modal-content');
-    if (modalContent && !modalContent.contains(e.target)) {
+    const modalContent = document.querySelector('.m-content');
+    const modOverlay = document.querySelector('.m-overlay')
+    if (modalContent && modOverlay && !modalContent.contains(e.target)) {
         modalContent.classList.remove('active');
+        modOverlay.classList.remove('active');
         document.removeEventListener('mousedown', onDocumentClick);
     }
 }

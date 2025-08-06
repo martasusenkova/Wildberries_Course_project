@@ -12,7 +12,7 @@ export function createCard(products) {
     card.classList.add("card");
     card.setAttribute('data-id', product.id);
     card.innerHTML = `<div class="card__top-wrap"><img src= ${product.image} class ="card__top-wrap__image"/></div><div class="card__sale-wrap"><p class="card__sale-wrap__sale"> -10% </p></div> 
-<div class="card__middle-wrap"> <p class="card__price"><span class="card__finalPrice">${product.finalPrice} р.</span> <span class="card__initailPrice">${product.price} р</span></p><h2 class="card__name-wrap"><span class="card__brand card__name">${product.brand} / </span><span class="card__name">${product.name}</span></h2> </div> `;
+<div class="card__middle-wrap"> <p class="card__price"><span class="card__finalPrice">${product.finalPrice} р.</span> <span class="card__initailPrice">${product.price} р</span></p><h2 class="card__name-wrap"><span class="card__brand">${product.brand} / </span><span class="card__name">${product.name}</span></h2> </div> `;
     const cardButton = document.createElement("button");
     cardButton.classList.add("card__button");
     cardButton.setAttribute('data-id', product.id);

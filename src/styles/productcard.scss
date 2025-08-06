@@ -40,6 +40,8 @@
       display: block;
     }
   }
+  &__middle-wrap {
+  }
   &__price {
     display: flex;
     flex-direction: row;
@@ -75,6 +77,19 @@
       font-size: 12px;
     }
   }
+  &__name-wrap {
+    display: flex;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  &__brand {
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 14px;
+    height: 48px;
+    flex-shrink: 0;
+  }
   &__name {
     font-family: Roboto;
     font-weight: 400;
@@ -83,6 +98,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    min-width: 0;
+    flex-shrink: 1;
   }
   &__button {
     margin: 0 auto;
