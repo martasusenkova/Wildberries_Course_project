@@ -1,3 +1,4 @@
+import { app } from "../main.js";
 import { getCard } from "../js/utils";
 export function openModalWindow(cardId) {
     const modalContainer = document.querySelector('.m-content');
@@ -42,15 +43,15 @@ export function modalWindow(cardId) {
     const productTitle = document.createElement('h2');
     productTitle.className = 'm-content__card__content__header__title';
 
-    const brandSpan = document.createElement('span');
-    brandSpan.textContent = productCardEntity.brand;
-    const titleSpan = document.createElement('span');
-    titleSpan.textContent = productCardEntity.name;
-    const separatorSpan = document.createElement('span');
-    separatorSpan.textContent = " / ";
-    productTitle.appendChild(brandSpan);
-    productTitle.appendChild(separatorSpan);
-    productTitle.appendChild(titleSpan);
+  const brandSpan = document.createElement("span");
+  brandSpan.textContent = productCardEntity.brand;
+  const titleSpan = document.createElement("span");
+  titleSpan.textContent = productCardEntity.name;
+  const separatorSpan = document.createElement("span");
+  separatorSpan.textContent = " / ";
+  productTitle.appendChild(brandSpan);
+  productTitle.appendChild(separatorSpan);
+  productTitle.appendChild(titleSpan);
 
     const productInfo = document.createElement('div');
     productInfo.className = 'm-content__card__content__info';
@@ -78,35 +79,41 @@ export function modalWindow(cardId) {
     infoBtn.className = 'm-content__card__content__info-button';
     infoBtn.textContent = 'Больше информации о товаре';
 
-    // Собираем
-    buttons.appendChild(basketBtn);
-    buttons.appendChild(buyBtn);
-    productHeader.appendChild(productTitle);
-    productInfo.appendChild(productPrice);
-    productInfo.appendChild(buttons);
-    productContent.appendChild(productTitle);
-    productContent.appendChild(productInfo);
-    productContent.appendChild(infoBtn);
+  // Собираем
+  buttons.appendChild(basketBtn);
+  buttons.appendChild(buyBtn);
+  productHeader.appendChild(productTitle);
+  productInfo.appendChild(productPrice);
+  productInfo.appendChild(buttons);
+  productContent.appendChild(productTitle);
+  productContent.appendChild(productInfo);
+  productContent.appendChild(infoBtn);
 
-    productCard.appendChild(productImg);
-    productCard.appendChild(productContent);
+  productCard.appendChild(productImg);
+  productCard.appendChild(productContent);
 
-    modalContent.appendChild(closeBtn);
-    modalContent.appendChild(productCard);
-    const app = document.getElementById('app');
-    app.appendChild(modalContent);
+  modalContent.appendChild(closeBtn);
+  modalContent.appendChild(productCard);
+
+  app.appendChild(modalContent);
     app.appendChild(modOverlay);
-    modalContent.classList.add('active');
+  modalContent.classList.add("active");
+
+  basketBtn.addEventListener("click", () => changeText(basketBtn));
+
+  function changeText(basketBtn) {
+    basketBtn.textContent = "Перейти в корзину!";
+    basketBtn.classList.add("card__button-two");
+    buyBtn.style.display = "none";
+  }
     const modalOverlay = document.querySelector('.m-overlay')
     modalOverlay.classList.add('active');
 }
 function onDocumentClick(e) {
     // Если клик был вне modalContent
-    const modalContent = document.querySelector('.m-content');
-    const modOverlay = document.querySelector('.m-overlay')
-    if (modalContent && modOverlay && !modalContent.contains(e.target)) {
+    const modalContent = document.querySelector('.modal-content');
+    if (modalContent && !modalContent.contains(e.target)) {
         modalContent.classList.remove('active');
-        modOverlay.classList.remove('active');
         document.removeEventListener('mousedown', onDocumentClick);
     }
 }

@@ -93,6 +93,7 @@
           }
           &__basket:hover {
             background: #a73afd;
+            color: white;
           }
         }
       }
@@ -116,4 +117,14 @@
 }
 .m-content.active {
   display: flex;
+}
+.card__button-two {
+  background-color: #f7e5fc;
+  color: #aa4ccf;
+  font-weight: 800;
+}
+
+.card__button-two:hover {
+  background-color: #efe2ec;
+  color: #aa4ccf;
 }
