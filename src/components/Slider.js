@@ -1,4 +1,5 @@
 import "../styles/slider.scss";
+export let sliderWrapper;
 
 export function createSlider() {
   const sliderWrapper = document.createElement("div");
