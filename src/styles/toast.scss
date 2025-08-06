@@ -1,24 +1,38 @@
 .toast {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  display: none;
-  z-index: 50;
+position: fixed;
+left: 50%;
+/*top: 100%;*/
+/*transform: translateX(-50%);*/
+background-color: rgba(0, 0, 0, 0.7);
+color:white;
+padding:10px;
+border-radius: 5px;
+display: none;
+z-index: 2500;
+animation-name: slideDown;
+animation-duration: 6s; /* Общая длительность анимации */
+animation-iteration-count: 1; /* Количество повторов (1 раз) */
+animation-fill-mode: forwards; /* Зафиксировать конечный стиль */
 }
+
 .toast_show {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
   display: block;
-  z-index: 50;
+}
+@keyframes slideDown {
+  0% {
+    transform: translateY(-500px); /* Начальное положение */
+    animation-delay: 0s; /* Задержка для начального движения */
+  }
+  50% {
+    transform: translateY(-150px); /* Движение вниз */
+     animation-delay: 0s;
+  }
+  50.1% {
+     transform: translateY(-150px);
+     animation-delay: 6s; /* Задержка перед движением вверх */
+  }
+  100% {
+    transform: translateY(-500px); /* Движение вверх */
+     animation-delay: 0s;
+  }
 }

@@ -6,10 +6,9 @@ toast.textContent = 'Товар добавлен в корзину';
 
     export function showToast() {
       toast.classList.add("toast_show");
-      // Скрываем через 5 секунд
+      // Скрываем через 3 секунды
       setTimeout(() => {
         toast.classList.remove("toast_show");
-      }, 5000);
+      }, 3000);
     }
  
-//document.getElementsByClassName('card__button').addEventListener("click", () => showToast());
