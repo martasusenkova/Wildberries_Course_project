@@ -97,6 +97,7 @@
   flex-shrink: 0;
 }
 .card__name {
+  color: #9d9da5;
   font-family: Roboto;
   font-weight: 400;
   font-size: 14px;
