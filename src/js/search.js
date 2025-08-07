@@ -85,6 +85,8 @@ export function searchProducts(inputSearch, slider, container) {
       emptyMessage =
         handleSearch(query, container, currentEmptyMessage, inputSearch) ||
         null;
+
+      // saveQueryToHistory(query);
     }
   });
 }

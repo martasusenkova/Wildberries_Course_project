@@ -5,17 +5,17 @@ import { getOrCreateContainer, createCard } from "./components/ProductCard.js";
 import "./styles/style.scss";
 import "./styles/slider.scss";
 import "./components/Slider.js";
-import { handleSearch, searchProducts } from "./js/search.js";
-import { setupLogoClick } from "./components/Logo.js";
+import { searchProducts } from "./js/search.js";
+import { setupHomeClick } from "./components/HomeClick.js";
 export const app = document.getElementById("app");
 
 document.addEventListener("DOMContentLoaded", () => {
   const { header, inputSearch, logo } = createHeader();
-  const tabBar = createTabBar();
+  const { tabBar, btnBasketTab, btnHome } = createTabBar();
   const slider = createSlider();
   app.append(header, tabBar, slider);
   const container = getOrCreateContainer();
   const card = createCard(getProductCards(), container);
   searchProducts(inputSearch, slider, container);
-  setupLogoClick(logo, slider, inputSearch, container);
+  setupHomeClick(logo, slider, inputSearch, container, btnHome);
 });

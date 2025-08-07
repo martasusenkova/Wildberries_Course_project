@@ -36,5 +36,5 @@ export function createTabBar() {
 
   tabBar.append(btnHome);
   tabBar.append(btnBasketTab);
-  return tabBar;
+  return { tabBar, btnBasketTab, btnHome };
 }
