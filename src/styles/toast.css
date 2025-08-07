@@ -1,10 +1,13 @@
 .toast {
   position: fixed;
   left: 50%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.75);
   color: white;
-  padding: 10px;
+  padding: 10px 18px;
   border-radius: 5px;
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 16px;
   display: none;
   z-index: 2500;
   opacity: 0;
@@ -17,6 +20,17 @@
 .toast_show {
   display: block;
 }
+.toast::before{
+content: "\2714"; /* Или "\2713" */
+  font-size: 16px;
+  color: white;
+  margin-right: 7px; /* Необязательно, для отступа от текста */
+  vertical-align: middle; /* Выравнивание по вертикали */
+  /* Другие стили, если нужно */
+}
+
+
+
 
 @keyframes slideDownUp {
   0% {
