@@ -1,38 +1,38 @@
 .toast {
-position: fixed;
-left: 50%;
-/*top: 100%;*/
-/*transform: translateX(-50%);*/
-background-color: rgba(0, 0, 0, 0.7);
-color:white;
-padding:10px;
-border-radius: 5px;
-display: none;
-z-index: 2500;
-animation-name: slideDown;
-animation-duration: 6s; /* Общая длительность анимации */
-animation-iteration-count: 1; /* Количество повторов (1 раз) */
-animation-fill-mode: forwards; /* Зафиксировать конечный стиль */
+  position: fixed;
+  left: 50%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+  z-index: 2500;
+  opacity: 0;
+  animation-name: slideDownUp;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 .toast_show {
   display: block;
 }
-@keyframes slideDown {
+
+@keyframes slideDownUp {
   0% {
-    transform: translateY(-500px); /* Начальное положение */
-    animation-delay: 0s; /* Задержка для начального движения */
+    transform: translateY(-500px);
+    opacity: 0;
   }
-  50% {
-    transform: translateY(-150px); /* Движение вниз */
-     animation-delay: 0s;
+  20% {
+    transform: translateY(-150px);
+    opacity: 1;
   }
-  50.1% {
-     transform: translateY(-150px);
-     animation-delay: 6s; /* Задержка перед движением вверх */
+  80% {
+    transform: translateY(-150px);
+    opacity: 1;
   }
   100% {
-    transform: translateY(-500px); /* Движение вверх */
-     animation-delay: 0s;
+    transform: translateY(-500px);
+    opacity: 0;
   }
 }
