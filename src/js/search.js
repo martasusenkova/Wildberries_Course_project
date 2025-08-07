@@ -21,6 +21,8 @@ export function handleSearch(query, container, emptyMessage, inputSearch) {
   console.log("Searching for:", query, "Found:", filtered.length);
 
   container.innerHTML = "";
+  container.classList.add("container__margin");
+
   if (emptyMessage) emptyMessage.remove();
 
   if (filtered.length === 0) {
