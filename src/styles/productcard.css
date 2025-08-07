@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -38,36 +39,43 @@
   gap: 20px;
 }
 .card__finalPrice {
-  color: #FF3B30;
-  font-family: Roboto;
+  color: #ff3b30;
+  font-family: "Roboto";
   font-weight: 800;
   font-size: 18px;
 }
 .card__initailPrice {
   color: #212121;
   text-decoration: line-through;
-  font-family: Roboto;
+  font-family: "Roboto";
   font-weight: 500;
   font-size: 16px;
 }
 .card__sale {
-  color: #FF3B30;
+  color: #ffffff;
+  background-color: #ff3b30;
+  border-radius: 6px;
+  width: 40px;
+  padding: 1px 4px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
   position: relative;
+  z-index: 20;
   top: -44px;
-  font-family: Roboto;
-  font-weight: 800;
-  font-size: 19px;
+  font-family: "Roboto";
+  font-size: 14px;
 }
 .card__name {
-  font-family: Roboto;
+  font-family: "Roboto";
   font-weight: 500;
   font-size: 19px;
 }
 .card__button {
   margin: 0 auto;
   text-align: center;
-  color: #FFFFFF;
-  background-color: #6F2DBD;
+  color: #ffffff;
+  background-color: #6f2dbd;
   padding: 7px 5px 5px;
   border: none;
   display: flex;
@@ -76,13 +84,13 @@
   justify-content: center;
   align-items: center;
   border-radius: 12px;
-  font-family: Roboto;
+  font-family: "Roboto";
   font-weight: 500;
   font-size: 16px;
 }
 .card__button-two {
   background-color: #eedcea;
-  color: #6F2DBD;
+  color: #6f2dbd;
   font-weight: 800;
 }
 .card__show-button {
@@ -98,7 +106,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 6px;
-  font-family: Roboto;
+  font-family: "Roboto";
   font-weight: 400;
   font-size: 16px;
 }
@@ -114,6 +122,49 @@
   opacity: 0.7;
 }
 
+.containerEmptyWrapper {
+  margin: 20px 5px 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  grid-column: 1/-1; /* сообщение занимает всю ширину */
+  grid-row: 1/span 2; /* максимум первые две строки */
+}
+
+.emptyMessage {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 350px;
+  max-width: 600px;
+  /* Центрируем по горизонтали, если нужно */
+  justify-self: start; /* или center — если хочешь по центру */
+  /* Ограничиваем по строкам */
+}
+
+.emptyMessage-sub {
+  justify-self: start; /* или center — если хочешь по центру */
+}
+
+.containerEmptyWrapper::before {
+  content: "";
+  background-image: url(../assets/not-found.svg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  flex-shrink: 0;
+  width: 90px;
+  height: 80px;
+  margin: 0 0 0 34px;
+  display: block;
+}
+
 @media (min-width: 768px) {
   .productContainer {
     grid-template-columns: repeat(4, calc(25% - 6px));
@@ -123,6 +174,11 @@
 @media (min-width: 1024px) {
   .productContainer {
     row-gap: 20px;
+  }
+  .containerEmptyWrapper {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    display: flex;
   }
 }
 @media (min-width: 1280px) {

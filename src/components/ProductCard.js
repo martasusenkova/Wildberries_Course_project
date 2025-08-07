@@ -1,13 +1,22 @@
 import { openModalWindow } from "./ProductCardModal.js";
 import { app } from "../main.js";
 
-export function createCard(products) {
-  // Создаём один контейнер
-  const container = document.createElement("div");
-  container.classList.add("productContainer");
+export function getOrCreateContainer() {
+  let container = document.querySelector(".productContainer");
+  if (!container) {
+    container = document.createElement("div");
+    container.classList.add("productContainer");
+    app.appendChild(container);
+  }
+  return container;
+}
 
+export function createCard(products, container) {
   // Если продуктов нет — не продолжаем
   if (!products || products.length === 0) return;
+
+  // Очищаем контейнер перед добавлением новых карточек
+  container.innerHTML = "";
 
   products.forEach((product) => {
     const card = document.createElement("div");
@@ -44,7 +53,6 @@ export function createCard(products) {
 
     card.append(cardButton, cardShowButton);
     container.appendChild(card);
-    return { card, cardButton, cardShowButton };
   });
 
   // Ставим обработчик на весь контейнер (делегирование)
@@ -55,8 +63,8 @@ export function createCard(products) {
     }
   });
 
-  // Добавляем контейнер с карточками в `app` один раз
-  app.appendChild(container);
+  // НЕ добавляем контейнер в DOM, он уже должен быть там
+  // app.appendChild(container);
 
   return container;
 }

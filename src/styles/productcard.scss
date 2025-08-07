@@ -1,131 +1,191 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 .container {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
 }
-.productContainer{
-grid-template-columns: repeat(2, calc(50% - 4px));
-grid-auto-flow: dense;
-gap: 8px;
-display: grid;
-justify-content: center;
-align-items: center;
+.productContainer {
+  grid-template-columns: repeat(2, calc(50% - 4px));
+  grid-auto-flow: dense;
+  gap: 8px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }
-.card{
-cursor: pointer;
-border-radius: 12px;
-&__image {
-width: 100%;
-height: auto;
-object-fit: cover;
-position: relative;
-z-index: 5;
+.card {
+  cursor: pointer;
+  border-radius: 12px;
+  &__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    position: relative;
+    z-index: 5;
+  }
+  &__price {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    gap: 20px;
+  }
+  &__finalPrice {
+    color: #ff3b30;
+    font-family: "Roboto";
+    font-weight: 800;
+    font-size: 18px;
+  }
+  &__initailPrice {
+    color: #212121;
+    text-decoration: line-through;
+    font-family: "Roboto";
+    font-weight: 500;
+    font-size: 16px;
+  }
+  &__sale {
+    color: #ffffff;
+    background-color: #ff3b30;
+
+    border-radius: 6px;
+    width: 40px;
+    padding: 1px 4px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    position: relative;
+    z-index: 20;
+    top: -44px;
+    font-family: "Roboto";
+    font-size: 14px;
+  }
+  &__name {
+    font-family: "Roboto";
+    font-weight: 500;
+    font-size: 19px;
+  }
+  &__button {
+    margin: 0 auto;
+    text-align: center;
+    color: #ffffff;
+    background-color: #6f2dbd;
+    padding: 7px 5px 5px;
+    border: none;
+    display: flex;
+    width: 100%;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    font-family: "Roboto";
+    font-weight: 500;
+    font-size: 16px;
+  }
+  &__button-two {
+    background-color: #eedcea;
+    color: #6f2dbd;
+    font-weight: 800;
+  }
+  &__show-button {
+    opacity: 0;
+    color: black;
+    position: relative;
+    top: -200px;
+    z-index: 5;
+    padding: 7px 5px 5px;
+    border: none;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 16px;
+  }
+  &__icon {
+    fill: white;
+    transition: fill 0.3s;
+  }
+  &__icon-path {
+    fill: white;
+  }
 }
-&__price{
-display: flex;
-flex-direction: row;
-justify-content: left;
-align-items: center;
-gap: 20px;
+.card:hover {
+  .card__show-button {
+    opacity: 0.7;
+  }
 }
-&__finalPrice{
-color: #FF3B30; 
-font-family: Roboto;
-font-weight: 800;
-font-size: 18px;
+
+.containerEmptyWrapper {
+  margin: 20px 5px 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  grid-column: 1 / -1; /* сообщение занимает всю ширину */
+  grid-row: 1 / span 2; /* максимум первые две строки */
 }
-&__initailPrice{
-color:#212121;  
-text-decoration: line-through;
-font-family: Roboto;
-font-weight: 500;
-font-size: 16px;
+
+.emptyMessage {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  width: fit-content;
+  max-width: 350px;
+  max-width: 600px;
+
+  /* Центрируем по горизонтали, если нужно */
+  justify-self: start; /* или center — если хочешь по центру */
+
+  /* Ограничиваем по строкам */
 }
-&__sale{
-color: #FF3B30;
-position: relative;
-top: -44px;
-font-family: Roboto;
-font-weight: 800;
-font-size: 19px;
+
+.emptyMessage-sub {
+  justify-self: start; /* или center — если хочешь по центру */
 }
-&__name{
-font-family: Roboto;
-font-weight: 500;
-font-size: 19px;
+
+.containerEmptyWrapper::before {
+  content: "";
+  background-image: url(../assets/not-found.svg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  flex-shrink: 0;
+  width: 90px;
+  height: 80px;
+  margin: 0 0 0 34px;
+  display: block;
 }
-&__button{
-margin: 0 auto;
-text-align: center;
-color: #FFFFFF;
-background-color: #6F2DBD;
-padding: 7px 5px 5px;
-border: none;
-display: flex;
-width: 100%;
-gap: 8px;
-justify-content: center;
-align-items: center;
-border-radius: 12px;
-font-family: Roboto;
-font-weight: 500;
-font-size: 16px;
-}
-&__button-two{
-background-color:#eedcea;
-color:#6F2DBD;
-font-weight: 800;
-}
-&__show-button{
-opacity: 0;
-color: black;
-position: relative;
-top: -200px;
-z-index: 5;
-padding: 7px 5px 5px;
-border: none;
-display: flex;
-width: 100%;
-justify-content: center;
-align-items: center;
-border-radius: 6px;
-font-family: Roboto;
-font-weight: 400;
-font-size: 16px;
-}
-&__icon{
-fill:white;
-transition: fill 0.3s;
-}
-&__icon-path{
-fill: white;
-}
-}
-.card:hover{
-.card__show-button{
-opacity: 0.7;
-}
-}
+
 @media (min-width: 768px) {
-.productContainer{
- grid-template-columns: repeat(4, calc(25% - 6px));
- row-gap: 15px;
-}
+  .productContainer {
+    grid-template-columns: repeat(4, calc(25% - 6px));
+    row-gap: 15px;
+  }
 }
 
 @media (min-width: 1024px) {
-.productContainer {
-row-gap: 20px;
-}
+  .productContainer {
+    row-gap: 20px;
+  }
+  .containerEmptyWrapper {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    display: flex;
+    // font-size: 24сx;
+    // line-height: 32px;
+  }
 }
 
 @media (min-width: 1280px) {
-.productContainer {
-grid-template-columns: repeat(6, calc(16.6667% - 25px));
-column-gap: 15px;
-}
+  .productContainer {
+    grid-template-columns: repeat(6, calc(16.6667% - 25px));
+    column-gap: 15px;
+  }
 }
