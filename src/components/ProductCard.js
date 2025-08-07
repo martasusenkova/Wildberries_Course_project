@@ -10,11 +10,12 @@ export function createCard(products) {
   products.forEach((product) => {
     const card = document.createElement("div");
     card.classList.add("card");
-    card.innerHTML = `<img src= ${product.image} class ="card__image"/> <p class="card__sale"> -10% </p> 
-<div class="card__price"> <p class="card__finalPrice">${product.finalPrice}</p> <p class="card__initailPrice">${product.price}</p> </div> <p class="card__name">${product.name}</p>`;
-
+    card.setAttribute('data-id', product.id);
+    card.innerHTML = `<div class="card__top-wrap"><img src= ${product.image} class ="card__top-wrap__image"/></div><div class="card__sale-wrap"><p class="card__sale-wrap__sale"> -10% </p></div> 
+<div class="card__middle-wrap"> <p class="card__price"><span class="card__finalPrice">${product.finalPrice} р.</span> <span class="card__initailPrice">${product.price} р</span></p><h2 class="card__name-wrap"><span class="card__brand">${product.brand}</span><span class="card__name"> / ${product.name}</span></h2> </div> `;
     const cardButton = document.createElement("button");
     cardButton.classList.add("card__button");
+    cardButton.setAttribute('data-id', product.id);
 
     cardButton.addEventListener("click", () => changeText(cardButton));
 
@@ -31,9 +32,9 @@ export function createCard(products) {
     cardShowButton.innerText = "Быстрый просмотр";
     cardShowButton.setAttribute("data-id", product.id);
 
-    app.appendChild(container);
     card.append(cardButton, cardShowButton);
     container.appendChild(card);
+    app.appendChild(container);
   });
 
   container.addEventListener("click", function (event) {
