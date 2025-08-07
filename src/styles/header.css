@@ -1,6 +1,6 @@
 header {
   min-width: 80px;
-  background: linear-gradient(90deg, #ED3CCA, #7C1AF8);
+  background: linear-gradient(90deg, #ed3cca, #7c1af8);
   display: flex;
   align-items: center;
   -moz-column-gap: 20px;
@@ -53,6 +53,7 @@ header__btnBasket:hover {
   -moz-column-gap: 20px;
        column-gap: 20px;
   justify-content: space-between;
+  position: relative;
 }
 .header__logo {
   background-image: url(../assets/header-tab-svg/logoWb.svg);
@@ -142,4 +143,26 @@ header__btnBasket:hover {
   .tabBar {
     display: none;
   }
+}
+.search-history {
+  list-style: none;
+  padding: 20px 0 0;
+  margin-top: 5px;
+  background: white;
+  border: 1px solid #ccc;
+  position: absolute;
+  top: 0px;
+  z-index: 1000;
+  width: 100%;
+  max-width: 1144px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.search-history-item {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.search-history-item:hover {
+  background-color: #f0f0f0;
 }/*# sourceMappingURL=header.css.map */

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -82,6 +83,7 @@
   font-family: Roboto;
   font-weight: 800;
   font-size: 12px;
+  z-index: 5;
 }
 .card__name-wrap {
   display: flex;
@@ -159,6 +161,53 @@
   opacity: 0.9;
 }
 
+.container__margin {
+  margin-top: 20px;
+}
+
+.containerEmptyWrapper {
+  margin: 20px 5px 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  grid-column: 1/-1; /* сообщение занимает всю ширину */
+  grid-row: 1/span 2; /* максимум первые две строки */
+}
+
+.emptyMessage {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 350px;
+  max-width: 600px;
+  /* Центрируем по горизонтали, если нужно */
+  justify-self: start; /* или center — если хочешь по центру */
+  /* Ограничиваем по строкам */
+}
+
+.emptyMessage-sub {
+  justify-self: start; /* или center — если хочешь по центру */
+}
+
+.containerEmptyWrapper::before {
+  content: "";
+  background-image: url(../assets/not-found.svg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  flex-shrink: 0;
+  width: 90px;
+  height: 80px;
+  margin: 0 0 0 34px;
+  display: block;
+}
+
 @media (min-width: 768px) {
   .productContainer {
     grid-template-columns: repeat(4, calc(25% - 6px));
@@ -168,6 +217,11 @@
 @media (min-width: 1024px) {
   .productContainer {
     row-gap: 20px;
+  }
+  .containerEmptyWrapper {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    display: flex;
   }
 }
 @media (min-width: 1280px) {
