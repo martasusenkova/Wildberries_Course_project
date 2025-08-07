@@ -9,6 +9,6 @@ toast.textContent = 'Товар добавлен в корзину';
       // Скрываем через 3 секунды
       setTimeout(() => {
         toast.classList.remove("toast_show");
-      }, 3000);
+      }, 5000);
     }
  
