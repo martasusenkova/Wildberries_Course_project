@@ -10,6 +10,7 @@ export function createSlider() {
   sliderWrapper.appendChild(sliderTrack);
 
   const imagesBig = [
+    "src/assets/slider_images/slider7_big.webp",
     "src/assets/slider_images/slider1_big.webp",
     "src/assets/slider_images/slider2_big.webp",
     "src/assets/slider_images/slider3_big.webp",
@@ -18,6 +19,7 @@ export function createSlider() {
     "src/assets/slider_images/slider6_big.webp",
   ];
   const imagesMedium = [
+    "src/assets/slider_images/slider7_medium.webp",
     "src/assets/slider_images/slider1_medium.webp",
     "src/assets/slider_images/slider2_medium.webp",
     "src/assets/slider_images/slider3_medium.webp",
