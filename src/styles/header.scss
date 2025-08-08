@@ -11,6 +11,13 @@ header {
   top: 0;
   z-index: 10;
 
+  input[type="file"] {
+    overflow: hidden;
+    border: 0;
+    background-color: transparent;
+    color: transparent;
+  }
+
   &__logo {
     background-image: url(../assets/header-tab-svg/logoWb.svg);
     background-size: cover;
@@ -19,14 +26,6 @@ header {
     height: 50px;
     width: 260px;
     display: none;
-  }
-
-  &__searchInput {
-    height: 40px;
-    width: 100%;
-    padding: 15px;
-    font-size: 15px;
-    border-radius: 15px;
   }
 
   &__btnBasket {
@@ -69,12 +68,58 @@ header {
     display: none;
   }
 
+  /* Обёртка для поиска */
+  &__searchWrapper {
+    position: relative;
+    flex: 1; // чтобы тянулась на всё доступное место
+  }
+  &__searchWrapper::after {
+    content: "";
+    cursor: pointer;
+    top: 4px;
+    right: 10px;
+
+    z-index: 30;
+    display: flex;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 0;
+    line-height: 1;
+    position: absolute;
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    // padding-top: 40px;
+    margin-right: 4px;
+
+    background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2028%2028%22%3E%3Cpath%20fill%3D%22%23C8C8D1%22%20fill-rule%3D%22evenodd%22%20d%3D%22m1.956%2020.53-.75-9.045c-.041-.493-.062-.74.004-.955.059-.19.165-.362.309-.5.162-.155.392-.247.851-.432l4.412-1.772c.281-.113.422-.17.54-.256.105-.076.196-.17.27-.276.083-.12.136-.262.242-.547l1.195-3.2c.164-.437.245-.656.387-.817.126-.142.284-.252.46-.32.202-.076.435-.076.902-.076h6.446c.467%200%20.7%200%20.9.076.178.068.336.178.462.32.141.161.223.38.386.818l1.195%203.2c.106.283.16.426.243.546.074.106.165.2.27.276.118.087.259.143.54.256l4.412%201.772c.459.185.688.277.851.432.144.138.25.31.308.5.067.215.046.462.005.955l-.75%209.046c-.15%201.812-.226%202.718-.627%203.403a3.5%203.5%200%200%201-1.51%201.39c-.717.343-1.626.343-3.444.343H7.537c-1.818%200-2.727%200-3.444-.343a3.5%203.5%200%200%201-1.51-1.39c-.401-.686-.477-1.591-.627-3.404Zm12.045-.695a3.88%203.88%200%200%200%203.873-3.89%203.88%203.88%200%200%200-3.873-3.888%203.88%203.88%200%200%200-3.872%203.889A3.88%203.88%200%200%200%2014%2019.835Z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E%0A);
+  }
   &__searchInput {
+    z-index: 40;
+
     height: 40px;
     width: 100%;
-    padding: 15px;
+    padding: 15px 45px 15px 15px; // добавляем отступ справа под иконку
     font-size: 15px;
     border-radius: 15px;
+  }
+
+  &__searchLabel {
+    opacity: 0;
+    width: 10px;
+    height: 60px;
+  }
+  &__photo-searchInput {
+    display: flex;
+    position: absolute;
+    width: 80px;
+    height: 60px;
+    right: 6px;
+    top: 10px;
+    opacity: 0;
+    pointer-events: all;
   }
 
   &__btnBasket {
@@ -145,6 +190,10 @@ header {
       padding: 0 32px;
     }
 
+    &__searchWrapper::after {
+      top: 14px;
+      right: 10px;
+    }
     &__searchInput {
       height: 60px;
       font-size: 18px;
@@ -163,23 +212,126 @@ header {
     display: none;
   }
 }
+
+/* История поиска теперь адаптируется к ширине инпута */
 .search-history {
   list-style: none;
-  padding: 20px 0 0;
-  margin-top: 5px;
-  background: white;
+  padding: 10px 0;
+  margin-top: 10px;
   border: 1px solid #ccc;
   position: absolute;
-  top: 0px;
+  top: 100%; /* прямо под инпутом */
+  left: 0;
   z-index: 1000;
-  width: 100%;
-  max-width: 1144px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  width: 100%; /* равна ширине .header__searchWrapper */
+
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+@media (min-width: 1024px) {
+  .search-catalog__btn--clear:before {
+    width: 2px;
+    height: 18px;
+  }
+}
+@media (min-width: 1024px) {
+  .search-catalog__btn--clear:after,
+  .search-catalog__btn--clear:before {
+    content: "";
+    background-color: #a9a8b0;
+    border-radius: 1px;
+    transition: background 0.3s;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(0) rotate(45deg);
+  }
+}
+.search-catalog__btn--clear:after,
+.search-catalog__btn--clear:before {
+  left: auto;
+  right: 20px;
+  transform: translate(50%, -50%) rotate(45deg);
+}
+.search-catalog__btn--clear:before {
+  width: 2px;
+  height: 16px;
+}
+.search-catalog__btn--clear:after,
+.search-catalog__btn--clear:before {
+  content: "";
+  background-color: #a9a8b0;
+  border-radius: 1px;
+  transition: background 0.3s;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateZ(0) rotate(45deg);
+}
+:before,
+:after {
+  box-sizing: border-box;
+}
+@media (min-width: 1024px) {
+  .search-catalog__btn--clear {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    font-size: 0;
+    line-height: 1;
+    display: none;
+    position: relative;
+  }
+}
+.search-catalog__btn--clear {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  order: -1;
+  width: 40px;
+  height: 40px;
+  font-size: 0;
+  line-height: 1;
+  display: none;
+  position: relative;
 }
 
+.search-catalog__btn {
+  cursor: pointer;
+  background-color: transparent;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  font-size: 0;
+  line-height: 1;
+  transition: background-image 0.3s;
+  display: block;
+  position: relative;
+}
 .search-history-item {
   padding: 8px 12px;
   cursor: pointer;
+  display: flex;
+}
+
+.search-history-item::before {
+  content: "";
+  z-index: 30;
+  position: relative;
+  display: flex;
+  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22%23A9A8B0%22%20fill-rule%3D%22evenodd%22%20d%3D%22M7.333%201.334a6%206%200%201%200%203.745%2010.688l2.784%202.783a.667.667%200%200%200%20.943-.942l-2.784-2.784a6%206%200%200%200-4.688-9.745Zm-4.666%206a4.667%204.667%200%201%201%209.333%200%204.667%204.667%200%200%201-9.333%200Z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E);
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin: 0 16px 0 8px;
 }
 
 .search-history-item:hover {

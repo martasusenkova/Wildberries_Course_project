@@ -8,18 +8,45 @@ export function createHeader() {
   logo.classList.add("header__logo");
   logo.href = "#app";
 
+  const searchWrapper = document.createElement("div");
+  searchWrapper.classList.add("header__searchWrapper");
+
   const inputSearch = document.createElement("input");
   inputSearch.classList.add("header__searchInput");
   inputSearch.placeholder = "Найти на Wildberries";
+
+  // Кнопка-иконка (label для file input)
+  const label = document.createElement("label");
+  label.classList.add("header__searchLabel");
+  label.setAttribute("for", "uploadPhoto");
+
+  // Скрытый file input
+  const fileInput = document.createElement("input");
+  fileInput.classList.add("header__photo-searchInput");
+
+  fileInput.type = "file";
+  fileInput.id = "uploadPhoto";
+  fileInput.accept = "image/*";
+  fileInput.capture = "environment";
+
+  // При выборе файла — выводим в консоль (или запускаем поиск по фото)
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (file) {
+      console.log("Загружен файл:", file);
+      // Тут можно сделать превью или поиск по фото
+    }
+  });
 
   const btnBasket = document.createElement("button");
   btnBasket.classList.add("header__btnBasket");
   btnBasket.innerHTML = "Корзина";
 
-  wrapper.append(logo, inputSearch, btnBasket);
+  searchWrapper.append(inputSearch, label, fileInput);
+  wrapper.append(logo, searchWrapper, btnBasket);
   header.append(wrapper);
 
-  return { header, inputSearch, logo };
+  return { header, wrapper, logo, searchWrapper, inputSearch, fileInput };
 }
 
 //создание tabBar

@@ -9,17 +9,15 @@ import { searchProducts } from "./js/search.js";
 import { setupHomeClick } from "./components/HomeClick.js";
 import { toast } from "./components/toast.js";
 
-
 export const app = document.getElementById("app");
 
 document.addEventListener("DOMContentLoaded", () => {
-  const { header, inputSearch, logo } = createHeader();
+  const { header, logo, wrapper, searchWrapper, inputSearch } = createHeader();
   const { tabBar, btnBasketTab, btnHome } = createTabBar();
   const slider = createSlider();
   app.append(header, tabBar, slider, toast);
   const container = getOrCreateContainer();
   const card = createCard(getProductCards(), container);
-  searchProducts(inputSearch, slider, container);
+  searchProducts(inputSearch, slider, container, app);
   setupHomeClick(logo, slider, inputSearch, container, btnHome);
-  
 });
