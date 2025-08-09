@@ -116,7 +116,7 @@ export function handleSearch(query, container, emptyMessage, inputSearch) {
 }
 
 // Поиск товаров
-export function searchProducts(inputSearch, slider, container, app) {
+export function searchProducts(inputSearch, slider, container, searchWrapper) {
   let emptyMessage = null;
 
   // Поиск по Enter
@@ -129,6 +129,9 @@ export function searchProducts(inputSearch, slider, container, app) {
 
       slider.style.display = "none";
       container.innerHTML = ""; // очистить контейнер
+
+      // Меняем иконку на крестик
+      searchWrapper.classList.add("is-searching");
 
       // Удаляем предыдущий прогресс-бар, если есть
       const oldLoader = container.querySelector(".loader");
@@ -188,7 +191,13 @@ export function searchProducts(inputSearch, slider, container, app) {
       if (old) old.remove();
     }, 200);
   });
-}
 
-// background-image: url(data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M7.361.238a.977.977%200%20011.278%200l7.097%206.377a.755.755%200%20010%201.147.977.977%200%2001-1.278%200L8%201.96%201.542%207.762a.977.977%200%2001-1.277%200%20.755.755%200%20010-1.147L7.36.238z%22%20fill%3D%22%239D9DA5%22%2F%3E%3Crect%20width%3D%222%22%20height%3D%2216%22%20rx%3D%221%22%20transform%3D%22matrix%28-1%200%200%201%209%200%29%22%20fill%3D%22%239D9DA5%22%2F%3E%3C%2Fsvg%3E);
-// transform: rotate(270deg);
+  searchWrapper.addEventListener("click", (e) => {
+    // проверяем, что клик именно по псевдоэлементу ::after (крестику)
+    if (searchWrapper.classList.contains("is-searching")) {
+      searchInput.value = "";
+      searchWrapper.classList.remove("is-searching");
+      searchInput.focus();
+    }
+  });
+}
