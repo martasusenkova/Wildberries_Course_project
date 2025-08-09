@@ -2,7 +2,6 @@ import { openModalWindow } from "./ProductCardModal.js";
 import { app } from "../main.js";
 import { toast, showToast } from "./toast.js";
 
-
 export function getOrCreateContainer() {
   let container = document.querySelector(".productContainer");
   if (!container) {
@@ -35,11 +34,11 @@ export function createCard(products, container) {
       </svg>
       <p>Корзина</p>
     `;
-function changeText(cardButton) {
+    function changeText(cardButton) {
       cardButton.textContent = "В корзине!";
       cardButton.classList.add("card__button-two");
     }
-    
+
     cardButton.addEventListener("click", () => {
       changeText(cardButton);
       showToast();
@@ -65,9 +64,6 @@ function changeText(cardButton) {
       openModalWindow(cardId);
     }
   });
-
-  // НЕ добавляем контейнер в DOM, он уже должен быть там
-  // app.appendChild(container);
 
   return container;
 }

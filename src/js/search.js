@@ -116,7 +116,13 @@ export function handleSearch(query, container, emptyMessage, inputSearch) {
 }
 
 // Поиск товаров
-export function searchProducts(inputSearch, slider, container, searchWrapper) {
+export function searchProducts(
+  inputSearch,
+  slider,
+  container,
+  searchWrapper,
+  fileInput
+) {
   let emptyMessage = null;
 
   // Поиск по Enter
@@ -129,9 +135,10 @@ export function searchProducts(inputSearch, slider, container, searchWrapper) {
 
       slider.style.display = "none";
       container.innerHTML = ""; // очистить контейнер
-
+      container.classList.add("wide-container");
       // Меняем иконку на крестик
       searchWrapper.classList.add("is-searching");
+      fileInput.classList.add("input-disabled"); // отключаем прием фото
 
       // Удаляем предыдущий прогресс-бар, если есть
       const oldLoader = container.querySelector(".loader");
@@ -145,8 +152,8 @@ export function searchProducts(inputSearch, slider, container, searchWrapper) {
       loader.setAttribute("height", "64");
       loader.setAttribute("viewBox", "0 0 66 66");
       loader.style.position = "absolute";
-      loader.style.top = "40%";
-      loader.style.left = "50%";
+      loader.style.top = "35%";
+      loader.style.left = "45%";
 
       const circle = document.createElementNS(svgNS, "circle");
       circle.setAttribute("class", "path");
@@ -163,6 +170,7 @@ export function searchProducts(inputSearch, slider, container, searchWrapper) {
 
       setTimeout(() => {
         loader.remove();
+        container.classList.remove("wide-container");
 
         const currentEmptyMessage = container.querySelector(".emptyMessage");
         emptyMessage =
@@ -192,12 +200,21 @@ export function searchProducts(inputSearch, slider, container, searchWrapper) {
     }, 200);
   });
 
-  searchWrapper.addEventListener("click", (e) => {
-    // проверяем, что клик именно по псевдоэлементу ::after (крестику)
-    if (searchWrapper.classList.contains("is-searching")) {
-      searchInput.value = "";
+  // Если кнопка уже есть — не создаём второй раз
+  if (!searchWrapper.querySelector(".clear-btn")) {
+    const clearBtn = document.createElement("button");
+    clearBtn.classList.add("clear-btn");
+    clearBtn.setAttribute("aria-label", "Очистить поиск");
+    searchWrapper.appendChild(clearBtn);
+
+    // При клике — очищаем поле, убираем крест, фокусим
+    clearBtn.addEventListener("click", () => {
+      clearBtn.classList.add("clear-btn-zone");
+      fileInput.classList.remove("input-disabled"); // отключаем прием фото
+
+      inputSearch.value = "";
       searchWrapper.classList.remove("is-searching");
-      searchInput.focus();
-    }
-  });
+      inputSearch.focus();
+    });
+  }
 }

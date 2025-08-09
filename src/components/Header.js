@@ -34,7 +34,6 @@ export function createHeader() {
     const file = fileInput.files[0];
     if (file) {
       console.log("Загружен файл:", file);
-      // Тут можно сделать превью или поиск по фото
     }
   });
 

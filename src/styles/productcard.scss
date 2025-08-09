@@ -7,9 +7,11 @@
   flex-wrap: wrap;
   flex-direction: row;
   width: 100%;
+  height: 100%;
 }
 .productContainer {
   width: 100%;
+  height: 100%;
   position: relative;
   max-width: 1440px;
   margin: 0 auto;
@@ -20,6 +22,9 @@
   justify-content: center;
   align-items: stretch;
   background-color: #f4f4f4;
+}
+.wide-container {
+  height: 100vh !important;
 }
 .card {
   cursor: pointer;
@@ -154,6 +159,7 @@
     fill: white;
   }
 }
+
 .card:hover {
   .card__show-button {
     opacity: 0.9;
@@ -168,8 +174,8 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  grid-column: 1 / -1; /* сообщение занимает всю ширину */
-  grid-row: 1 / span 2; /* максимум первые две строки */
+  grid-column: 1 / -1;
+  grid-row: 1 / span 2;
 }
 
 .emptyMessage {
@@ -183,15 +189,11 @@
   width: fit-content;
   max-width: 350px;
   max-width: 600px;
-
-  /* Центрируем по горизонтали, если нужно */
-  justify-self: start; /* или center — если хочешь по центру */
-
-  /* Ограничиваем по строкам */
+  justify-self: start;
 }
 
 .emptyMessage-sub {
-  justify-self: start; /* или center — если хочешь по центру */
+  justify-self: start;
 }
 
 .containerEmptyWrapper::before {
@@ -222,8 +224,6 @@
     flex-direction: row-reverse;
     justify-content: flex-end;
     display: flex;
-    // font-size: 24сx;
-    // line-height: 32px;
   }
 }
 

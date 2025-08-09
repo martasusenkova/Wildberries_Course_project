@@ -101,8 +101,6 @@ header {
   }
 
   &__searchInput {
-    z-index: 40;
-
     height: 40px;
     width: 100%;
     padding: 15px 45px 15px 15px; // добавляем отступ справа под иконку
@@ -119,10 +117,12 @@ header {
     display: flex;
     position: absolute;
     width: 80px;
-    height: 60px;
-    right: 6px;
-    top: 10px;
+    height: 80px;
+    right: 2px;
+    top: -5px;
     opacity: 0;
+    z-index: 60;
+
     pointer-events: all;
   }
 
@@ -142,7 +142,25 @@ header {
     }
   }
 }
+.input-disabled {
+  pointer-events: none;
+}
 
+.clear-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 50;
+}
+.clear-btn-zone {
+  pointer-events: auto;
+}
 .tabBar {
   min-width: 80px;
   display: flex;
@@ -234,65 +252,7 @@ header {
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
-@media (min-width: 1024px) {
-  .search-catalog__btn--clear:before {
-    width: 2px;
-    height: 18px;
-  }
-}
-@media (min-width: 1024px) {
-  .search-catalog__btn--clear:after,
-  .search-catalog__btn--clear:before {
-    content: "";
-    background-color: #a9a8b0;
-    border-radius: 1px;
-    transition: background 0.3s;
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translateZ(0) rotate(45deg);
-  }
-}
-.search-catalog__btn--clear:after,
-.search-catalog__btn--clear:before {
-  left: auto;
-  right: 20px;
-  transform: translate(50%, -50%) rotate(45deg);
-}
-.search-catalog__btn--clear:before {
-  width: 2px;
-  height: 16px;
-}
-.search-catalog__btn--clear:after,
-.search-catalog__btn--clear:before {
-  content: "";
-  background-color: #a9a8b0;
-  border-radius: 1px;
-  transition: background 0.3s;
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) translateZ(0) rotate(45deg);
-}
-:before,
-:after {
-  box-sizing: border-box;
-}
-@media (min-width: 1024px) {
-  .search-catalog__btn--clear {
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-    width: 40px;
-    height: 40px;
-    font-size: 0;
-    line-height: 1;
-    display: none;
-    position: relative;
-  }
-}
+
 .search-catalog__btn--clear {
   cursor: pointer;
   background-color: transparent;
