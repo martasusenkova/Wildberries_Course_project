@@ -35,13 +35,14 @@ export function createCard(products, container) {
       </svg>
       <p>Корзина</p>
     `;
-function changeText(cardButton) {
+function changeText(cardButton, basketBtn) {
       cardButton.textContent = "В корзине!";
       cardButton.classList.add("card__button-two");
     }
     
     cardButton.addEventListener("click", () => {
       changeText(cardButton);
+      changeText(basketBtn);
       showToast();
     });
 
@@ -71,3 +72,4 @@ function changeText(cardButton) {
 
   return container;
 }
+

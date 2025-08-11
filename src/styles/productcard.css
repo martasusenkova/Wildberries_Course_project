@@ -19,7 +19,6 @@
   display: grid;
   justify-content: center;
   align-items: stretch;
-  background-color: #f4f4f4;
 }
 
 .card {
@@ -173,6 +172,10 @@
 .card__evaluation {
   padding-right: 15px;
 }
+.card__button-basket {
+  color: #ff3b30;
+  padding: 7px 5px 5px;
+}
 
 .card__evaluation::before {
   content: "★";
@@ -185,6 +188,11 @@
   opacity: 0.9;
 }
 
+@media (max-width: 780px) {
+  .card__show-button {
+    display: none;
+  }
+}
 .container__margin {
   margin-top: 20px;
 }

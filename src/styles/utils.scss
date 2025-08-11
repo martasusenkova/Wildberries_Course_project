@@ -11,7 +11,11 @@ bottom: 40px;
 left: 16px;
 }
 
-
+@media (max-width: 1023px) {
+  .scrollToTopBtn {
+    display: none !important;
+  }
+}
 @media (min-width: 1024px) {
 .scrollToTopBtn
 {
