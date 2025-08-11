@@ -1,24 +1,41 @@
 import { openModalWindow } from "./ProductCardModal.js";
 import { app } from "../main.js";
 import { toast, showToast } from "./toast.js";
-
-
-export function getOrCreateContainer() {
+import { getProductCards } from "../js/api.js";
+import { delay, throttle } from "../js/utils.js"
+const BATCH_SIZE = 20;
+const state = {
+  allProducts: [],
+  offset: 0,
+  done: false,
+  loading: false,
+  observer: null,
+};
+function getOrCreateContainer() {
   let container = document.querySelector(".productContainer");
   if (!container) {
     container = document.createElement("div");
     container.classList.add("productContainer");
     app.appendChild(container);
   }
+  container.addEventListener("click", (event) => {
+    if (event.target.classList.contains("card__show-button")) {
+      const cardId = event.target.dataset.id;
+      openModalWindow(cardId);
+
+    }
+  });
   return container;
 }
 
-export function createCard(products, container) {
+export function createCard(products, container, options = {}) {
   // Если продуктов нет — не продолжаем
   if (!products || products.length === 0) return;
-
+  const append = options.append === true;
   // Очищаем контейнер перед добавлением новых карточек
-  container.innerHTML = "";
+  if (!append) {
+    container.innerHTML = "";
+  }
 
   products.forEach((product) => {
     const card = document.createElement("div");
@@ -35,11 +52,11 @@ export function createCard(products, container) {
       </svg>
       <p>Корзина</p>
     `;
-function changeText(cardButton) {
+    function changeText(cardButton) {
       cardButton.textContent = "В корзине!";
       cardButton.classList.add("card__button-two");
     }
-    
+
     cardButton.addEventListener("click", () => {
       changeText(cardButton);
       showToast();
@@ -55,19 +72,83 @@ function changeText(cardButton) {
 
     card.append(cardButton, cardShowButton);
     container.appendChild(card);
-    app.appendChild(container);
   });
 
-  // Ставим обработчик на весь контейнер (делегирование)
-  container.addEventListener("click", (event) => {
-    if (event.target.classList.contains("card__show-button")) {
-      const cardId = event.target.dataset.id;
-      openModalWindow(cardId);
-    }
-  });
+  return container;
+}
+// делаем контейнер, который будет внизу страницы и сигнализировать, когда пересекает область видимости
+function getOrCreateLoader() {
+  let loader = document.querySelector(".loader");
+  if (!loader) {
+    loader = document.createElement("div");
+    loader.className = "loader";
+    loader.setAttribute("role", "status");
+    loader.style.cssText = "padding:16px;color:#666;text-align:center";
+    loader.textContent = "Загрузка…";
+    app.appendChild(loader);
+  }
+  return loader;
+}
+function setupObserver(loader, callback) {
+  if ("IntersectionObserver" in window) {
+    state.observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) callback();
+      });
+    }, { root: null, rootMargin: "400px 0px", threshold: 0 });
+    state.observer.observe(loader);
+  } else {
+    window.addEventListener("scroll", throttle(() => {
+      const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 600;
+      if (nearBottom) callback();
+    }, 200));
+  }
+}
+async function renderNextBatch(container, loader, first = false) {
+  if (state.loading || state.done) return;
+  state.loading = true;
 
-  // НЕ добавляем контейнер в DOM, он уже должен быть там
-  // app.appendChild(container);
+  await delay(1000);
+  const slice = state.allProducts.slice(state.offset, state.offset + BATCH_SIZE);
+  if (slice.length === 0) {
+    state.done = true;
+    loader.textContent = "Больше нет товаров";
+    if (state.observer) state.observer.unobserve(loader);
+    state.loading = false;
+    return;
+  }
 
+  if (first) {
+    createCard(slice, container, { append: false });
+  } else {
+    createCard(slice, container, { append: true });
+  }
+
+  state.offset += slice.length;
+  loader.textContent = "";
+  state.loading = false;
+
+  // Если контент ниже высоты окна, еще загрузим
+  if (document.body.offsetHeight < window.innerHeight && !state.done) {
+    renderNextBatch(container, loader, true);
+  }
+}
+export async function initProductsInfinite() {
+  const container = getOrCreateContainer();
+  const loader = getOrCreateLoader();
+
+  // сброс состояния
+  state.offset = 0;
+  state.done = false;
+  state.loading = false;
+  if (state.observer) {
+    state.observer.disconnect();
+    state.observer = null;
+  }
+  loader.textContent = "Загрузка…";
+
+  state.allProducts = getProductCards();
+  renderNextBatch(container, loader, true);
+  setupObserver(loader, () => renderNextBatch(container, loader, false));
   return container;
 }
