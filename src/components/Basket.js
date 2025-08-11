@@ -395,7 +395,7 @@ function createSuccessfulOrder() {
     emptyBasket.classList.add('basket__container_empty', 'basket');
     emptyBasket.setAttribute('height', '300px')
     const emptyBasketImage = document.createElement('img');
-    emptyBasketImage.src = 'src/assets/basket/deliveryCar.png';
+    emptyBasketImage.src = 'src/assets/basket/deliveryCar.gif';
     emptyBasketImage.classList.add('basket__image');
     const emptyBasketTitle = document.createElement('p');
     emptyBasketTitle.classList.add('basket__title');
