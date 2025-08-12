@@ -108,14 +108,18 @@ async function renderNextBatch(container, loader, first = false) {
   if (state.loading || state.done) return;
   state.loading = true;
 
-  await delay(1000);
+  await delay(500);
   const slice = state.allProducts.slice(state.offset, state.offset + BATCH_SIZE);
   if (slice.length === 0) {
-    state.done = true;
-    loader.textContent = "Больше нет товаров";
-    if (state.observer) state.observer.unobserve(loader);
+    state.offset = 0;
     state.loading = false;
-    return;
+    renderNextBatch(container, loader, false);
+    // return;
+    // state.done = true;
+    // loader.textContent = "Больше нет товаров";
+    // if (state.observer) state.observer.unobserve(loader);
+    // state.loading = false;
+    // return;
   }
 
   if (first) {
