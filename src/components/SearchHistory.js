@@ -1,3 +1,6 @@
+export const MAX_HISTORY = 5;
+export const SEARCH_HISTORY_KEY = "searchHistory";
+
 // Сохранение истории поиска
 export function saveQueryToHistory(query) {
   if (!query) return;

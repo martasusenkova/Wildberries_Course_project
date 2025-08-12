@@ -5,8 +5,6 @@ import {
   showSearchHistory,
 } from "../components/SearchHistory";
 let lastQuery = "";
-const MAX_HISTORY = 5;
-const SEARCH_HISTORY_KEY = "searchHistory";
 
 export function getLastQuery() {
   return lastQuery;
