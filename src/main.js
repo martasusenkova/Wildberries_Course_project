@@ -24,6 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setupHomeClick(logo, slider, inputSearch, container, btnHome);
 
   // Создаём чат-бот и кнопку toggler
-  const chatbot = createChatbot();
-  createChatbotToggler("#app", chatbot);
+  const chatbot = createChatbot(app); // передаём DOM-элемент app
+  createChatbotToggler(app, chatbot); // передаём app и объект чат-бота
 });

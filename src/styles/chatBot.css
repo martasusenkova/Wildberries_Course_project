@@ -1,108 +1,220 @@
 @charset "UTF-8";
+/* ====== Тогглер ====== */
 #chatbot-toggler {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: fixed;
   bottom: 30px;
   right: 35px;
-  border: none;
-  height: 50px;
-  width: 50px;
-  cursor: pointer;
-  pointer-events: all;
-  border-radius: 50%;
-  background: #9d34b4;
-  padding: 5px;
-  transition: all 0.2s ease;
   z-index: 1100;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: #a73afd;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 4px 8px rgba(167, 58, 253, 0.4);
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
-
-#app.show-chatbot #chatbot-toggler {
-  transform: rotate(90deg);
-}
-
 #chatbot-toggler span {
-  color: #fff;
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease;
 }
-
-#app.show-chatbot #chatbot-toggler span:first-child,
-#chatbot-toggler span:last-child {
-  opacity: 0;
-}
-
-#app.show-chatbot #chatbot-toggler span:last-child {
+#chatbot-toggler .chatbot__icon-open {
   opacity: 1;
-  pointer-events: auto;
-  transform: scale(1);
+  z-index: 2;
+}
+#chatbot-toggler .material-symbols-rounded {
+  opacity: 0;
+  z-index: 0;
+}
+#chatbot-toggler.open {
+  background: rgb(189.5527638191, 108.4874371859, 253.5125628141);
+  transform: scale(1.05);
+}
+#chatbot-toggler.open .chatbot__icon-open {
+  opacity: 0;
+  z-index: 0;
+}
+#chatbot-toggler.open .material-symbols-rounded {
+  opacity: 1;
+  z-index: 2;
 }
 
+/* ====== Модалка ====== */
+/* по умолчанию скрыта; показывается когда есть .open */
 .chatbot-popup {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 700px; /* шире */
-  height: 500px; /* чуть ниже */
+  width: 820px;
+  max-width: calc(100% - 32px);
+  height: 580px;
+  max-height: calc(100% - 64px);
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.28);
   display: none;
   flex-direction: column;
   overflow: hidden;
   z-index: 1050;
+  /* ======== Header ======== */
+  /* ======== Main area (desktop: two columns) ======== */
+  /* .chat-main */
 }
 .chatbot-popup.open {
   display: flex;
+  animation: chatFadeIn 160ms ease;
+}
+@keyframes chatFadeIn {
+  from {
+    transform: translate(-50%, -48%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
 }
 .chatbot-popup .chat-header {
-  background: #8e44ad;
-  color: #fff;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.chatbot-popup .chat-header .header-info {
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 12px 20px;
+  height: 56px;
+  /* Слева — контейнер который мы динамически меняем (текст "ЧАТЫ" или html с иконкой) */
+  /* Справа — показываем правый блок (иконка+название) и крест */
 }
-.chatbot-popup .chat-header .header-info .chatbot-logo {
-  width: 40px;
-  height: 40px;
-  margin-right: 12px;
+.chatbot-popup .chat-header .header-left {
+  min-width: 140px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #a73afd;
+  border-right: 1px solid #ddd; /* разделитель на всю высоту */
+  padding-right: 16px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  box-sizing: border-box;
+  gap: 8px;
+  /* если внутрь вставляется .chatbot-logo + .support-title, они будут корректно выровнены */
 }
-.chatbot-popup .chat-header button {
+.chatbot-popup .chat-header .header-left .chatbot-logo {
+  width: 30px;
+  height: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.chatbot-popup .chat-header .header-left .support-title {
+  display: flex;
+  flex-direction: column;
+}
+.chatbot-popup .chat-header .header-left .support-title h2 {
+  margin: 0;
+  font-size: 16px;
+}
+.chatbot-popup .chat-header .header-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.chatbot-popup .chat-header .header-right .header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.chatbot-popup .chat-header .header-right .header-info .chatbot-logo {
+  width: 30px;
+  height: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.chatbot-popup .chat-header .header-right .header-info .support-title h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+}
+.chatbot-popup .chat-header .header-right .header-info .support-title span {
+  display: none;
+}
+.chatbot-popup .chat-header .header-right button#close-chatbot {
   background: transparent;
   border: none;
-  color: #fff;
-  font-size: 24px;
+  font-size: 22px;
+  color: #666;
   cursor: pointer;
+  padding: 6px;
   line-height: 1;
+  transition: color 0.16s ease;
+  border-radius: 6px;
+}
+.chatbot-popup .chat-header .header-right button#close-chatbot:hover {
+  color: #a73afd;
+  background: rgba(167, 58, 253, 0.06);
 }
 .chatbot-popup .chat-main {
   display: flex;
   flex: 1;
+  min-height: 0;
+  /* Left column — vertical list on desktop */
+  /* Right column — chat body */
 }
 .chatbot-popup .chat-main .chat-list {
-  width: 180px;
-  background: #f6f6f6;
+  width: 140px;
+  background: #f9f7fd;
   border-right: 1px solid #ddd;
+  padding: 16px 12px;
+  box-sizing: border-box;
+  font-weight: 700;
+  font-size: 14px;
+  color: #a73afd;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
 }
 .chatbot-popup .chat-main .chat-list .chat-item {
-  padding: 15px;
+  padding: 10px 8px;
+  border-radius: 8px;
+  background: white;
+  color: #333;
+  font-weight: 600;
+  font-size: 13px;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 0.18s ease, transform 0.08s ease;
+}
+.chatbot-popup .chat-main .chat-list .chat-item:hover {
+  transform: translateY(-1px);
+  background: white;
 }
 .chatbot-popup .chat-main .chat-list .chat-item.active {
-  background: #e2d4f0;
-  font-weight: bold;
+  background: #a73afd;
+  color: white;
 }
 .chatbot-popup .chat-main .chat-body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 20px 24px;
+  min-width: 0;
+  /* scrollbar styling */
 }
 .chatbot-popup .chat-main .chat-body .messages {
   flex: 1;
@@ -110,37 +222,205 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding-right: 8px;
 }
-.chatbot-popup .chat-main .chat-body .messages .message {
-  padding: 12px 16px;
-  border-radius: 14px;
-  max-width: 75%;
-  white-space: pre-wrap;
-  font-size: 16px;
+.chatbot-popup .chat-main .chat-body .messages::-webkit-scrollbar {
+  width: 6px;
 }
-.chatbot-popup .chat-main .chat-body .messages .message.bot {
-  background: #f1f0f0;
-  align-self: flex-start;
+.chatbot-popup .chat-main .chat-body .messages::-webkit-scrollbar-thumb {
+  background: #bfbfbf;
+  border-radius: 6px;
 }
-.chatbot-popup .chat-main .chat-body .messages .message.user {
-  background: #f6d0ff;
-  color: #000;
-  align-self: flex-end;
+.chatbot-popup .chat-main .chat-body .messages::-webkit-scrollbar-track {
+  background: transparent;
 }
-.chatbot-popup .chat-main .chat-body .messages .buttons-wrapper {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+.chatbot-popup .chat-main .chat-body .messages {
+  scrollbar-width: thin;
+  scrollbar-color: #bfbfbf transparent;
 }
-.chatbot-popup .chat-main .chat-body .messages .buttons-wrapper .chat-option {
-  background: #fff;
-  border: 1.5px solid #ccc;
+.chatbot-popup .chat-main .chat-body .message {
+  max-width: 72%;
+  padding: 10px 14px;
   border-radius: 12px;
-  padding: 8px 14px;
-  cursor: pointer;
   font-size: 15px;
-  transition: background-color 0.2s ease;
+  line-height: 1.35;
+  word-wrap: break-word;
 }
-.chatbot-popup .chat-main .chat-body .messages .buttons-wrapper .chat-option:hover {
-  background: #f0f0f0;
+.chatbot-popup .chat-main .chat-body .message.bot {
+  align-self: flex-start;
+  background: #faf7fd;
+  color: #222;
+}
+.chatbot-popup .chat-main .chat-body .message.bot .sender {
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.chatbot-popup .chat-main .chat-body .message.user {
+  align-self: flex-end;
+  background: #f0fbff;
+  color: #222;
+}
+.chatbot-popup .chat-main .chat-body .buttons-wrapper {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+  min-width: 160px;
+}
+.chatbot-popup .chat-main .chat-body .answer-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #777;
+  text-align: right;
+  margin-bottom: 6px;
+}
+.chatbot-popup .chat-main .chat-body .buttons-row {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.chatbot-popup .chat-main .chat-body .chat-option {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1.6px solid #a73afd;
+  background: #fff;
+  color: #a73afd;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+.chatbot-popup .chat-main .chat-body .chat-option:hover {
+  background: rgba(167, 58, 253, 0.06);
+}
+
+/* .chatbot-popup */
+/* ================== Адаптив: мобильный и tablet до 1024px ================== */
+@media (max-width: 1024px) {
+  .chatbot-popup {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+    top: 0;
+    left: 0;
+    transform: none;
+    display: none; /* управляется классом .open */
+    flex-direction: column;
+    position: fixed;
+  }
+  /* Header: как в мессенджере — слева динамический блок (.header-left) виден, справа только крестик (header-info прячем) */
+  .chat-header {
+    padding: 12px 16px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .chat-header .header-left {
+    display: flex; /* на мобилке мы используем header-left для "ЧАТЫ" или вставленного headerInfoHTML */
+    min-width: 0;
+    font-size: 16px;
+    padding-right: 12px;
+    border-right: none; /* убираем вертикальный разделитель */
+    color: #111;
+    gap: 8px;
+  }
+  .chat-header .header-left .chatbot-logo {
+    width: 28px;
+    height: 28px;
+  }
+  .chat-header .header-left .support-title h2 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 700;
+  }
+  .chat-header .header-right {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    /* прячем правый блок info */
+    /* крестик виден в правом углу */
+  }
+  .chat-header .header-right .header-info {
+    display: none;
+  }
+  .chat-header .header-right button#close-chatbot {
+    font-size: 20px;
+  }
+  /* Основное: список чатов растягивается на всю ширину, горизонтальный скролл */
+  .chat-main {
+    display: block; /* упрощаем поток: сначала список, затем чат (chat-body абсолютный) */
+    position: relative;
+    min-height: calc(100vh - 56px); /* место под header */
+    /* chat-body — абсолютный полноэкранный слой, по умолчанию скрыт */
+    /* когда активирован класс .chat-open — показываем chat-body и прячем список (через transform & opacity для плавности) */
+  }
+  .chat-main .chat-list {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #f9f7fd;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    align-items: center;
+    white-space: nowrap;
+  }
+  .chat-main .chat-list .chat-item {
+    flex: 0 0 auto;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #333;
+    background: #fff;
+    transition: transform 0.12s ease;
+  }
+  .chat-main .chat-body {
+    position: absolute;
+    top: 56px; /* под header */
+    left: 0;
+    width: 100%;
+    height: calc(100% - 56px);
+    background: #fff;
+    padding: 16px 18px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    display: none;
+    z-index: 20;
+  }
+  .chat-main.chat-open {
+    /* небольшое сдвигание + затемнение */
+  }
+  .chat-main.chat-open .chat-list {
+    transform: translateX(-6%);
+    opacity: 0.02;
+    pointer-events: none;
+  }
+  .chat-main.chat-open .chat-body {
+    display: block;
+  }
+}
+/* небольшой дополнительный адаптив для очень маленьких экранов */
+@media (max-width: 420px) {
+  #chatbot-toggler {
+    bottom: 18px;
+    right: 18px;
+    width: 46px;
+    height: 46px;
+  }
+  .chatbot-popup .chat-header {
+    padding: 10px 12px;
+    height: 52px;
+  }
+  .chatbot-popup .chat-main .chat-list .chat-item {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  .chatbot-popup .chat-body {
+    padding: 12px 14px;
+  }
 }/*# sourceMappingURL=chatBot.css.map */
