@@ -310,6 +310,8 @@ export function createChatbotToggler(app, chatbot) {
     chatbotToggler.classList.toggle("open");
 
     if (nowOpen) {
+      document.body.style.overflow = "hidden";
+
       // открываем: выставляем состояние в зависимости от ширины
       if (window.innerWidth <= 1024) {
         chatbot.container.querySelector(".chat-list").style.display = "flex";
@@ -334,6 +336,7 @@ export function createChatbotToggler(app, chatbot) {
       app.classList.add("show-chatbot");
     } else {
       // закрываем
+      document.body.style.overflow = "";
       app.classList.remove("show-chatbot");
       chatbot.resetViewOnClose?.(); // внутри неё мы восстановим тогглер
     }
