@@ -17,7 +17,14 @@
 .toast_show {
   display: block;
 }
-
+.toast::before{
+content: "\2713\FE0E"; 
+  font-size: 16px;
+  color: white !important;
+  margin-right: 5px; 
+  vertical-align: middle; 
+ 
+}
 @keyframes slideDownUp {
   0% {
     transform: translateY(-500px);

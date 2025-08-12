@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const slider = createSlider();
   app.append(header, tabBar, slider, toast);
   const container = getOrCreateContainer();
-  const card = createCard(getProductCards(), container);
+  const { container: usedContainer, cards } = createCard(getProductCards(), container);
   searchProducts(inputSearch, slider, container);
   setupHomeClick(logo, slider, inputSearch, container, btnHome);
-  
 });
+

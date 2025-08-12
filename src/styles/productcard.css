@@ -53,6 +53,7 @@
   justify-content: left;
   align-items: center;
   gap: 20px;
+  padding-bottom: 5px;
 }
 .card__finalPrice {
   color: #ff3b30;
@@ -161,6 +162,7 @@
   font-size: 14px;
   height: 25px;
   flex-shrink: 0;
+  padding-bottom: 5px;
 }
 .card__opinion {
   color: #9d9da5;

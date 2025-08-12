@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .toast {
   position: fixed;
   left: 45%;
@@ -16,6 +17,14 @@
 
 .toast_show {
   display: block;
+}
+
+.toast::before {
+  content: "✓︎";
+  font-size: 16px;
+  color: white !important;
+  margin-right: 5px;
+  vertical-align: middle;
 }
 
 @keyframes slideDownUp {
