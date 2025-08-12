@@ -67,7 +67,6 @@ export function handleSearch(query, container, emptyMessage, inputSearch) {
 
 export function searchProducts(inputSearch, slider, container) {
   let emptyMessage = null;
-console.log(container);
   inputSearch.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
