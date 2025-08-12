@@ -12,6 +12,7 @@ $scroll-thumb: #bfbfbf;
   width: 50px;
   height: 50px;
   background: $wb-purple;
+  color: #f0fbff;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -95,13 +96,11 @@ $scroll-thumb: #bfbfbf;
     padding: 12px 20px;
     height: 56px;
 
-    /* Слева — контейнер который мы динамически меняем (текст "ЧАТЫ" или html с иконкой) */
     .header-left {
-      min-width: 140px;
+      min-width: 130px;
       font-weight: 700;
       font-size: 16px;
       color: $wb-purple;
-      border-right: 1px solid #ddd; /* разделитель на всю высоту */
       padding-right: 16px;
       user-select: none;
       display: flex;
@@ -110,7 +109,6 @@ $scroll-thumb: #bfbfbf;
       box-sizing: border-box;
       gap: 8px;
 
-      /* если внутрь вставляется .chatbot-logo + .support-title, они будут корректно выровнены */
       .chatbot-logo {
         width: 30px;
         height: 30px;
@@ -131,7 +129,7 @@ $scroll-thumb: #bfbfbf;
       flex: 1;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
       gap: 12px;
 
       .header-info {
@@ -366,6 +364,8 @@ $scroll-thumb: #bfbfbf;
       display: flex;
       gap: 8px;
       align-items: center;
+
+      flex-direction: row-reverse;
 
       .header-info {
         display: none;

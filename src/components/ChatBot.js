@@ -44,10 +44,26 @@ export function createChatbot(app) {
   const headerInfo = chatbotContainer.querySelector(".header-info");
   const closeBtn = chatbotContainer.querySelector("#close-chatbot");
 
-  // Сохраним HTML правого блока, чтобы вставлять в мобильный headerLeft
+  // helper: сброс состояния тогглера (иконка и видимость)
+  function resetTogglerIconAndShow() {
+    const toggler = document.querySelector("#chatbot-toggler");
+    if (toggler) {
+      toggler.classList.remove("open"); // вернёт иконку к исходной
+      toggler.style.display = ""; // восстановит видимость
+    }
+  }
+
+  // helper: спрятать тогглер (display: none) — используется на мобилке при открытии
+  function hideToggler() {
+    const toggler = document.querySelector("#chatbot-toggler");
+    if (toggler) {
+      toggler.style.display = "none";
+    }
+  }
+
   const headerInfoHTML = headerInfo.innerHTML;
 
-  // === Диалог (тот же что был) ===
+  // === Диалог ===
   const dialogTree = {
     start: {
       text: "Здравствуйте! Чем могу помочь?",
@@ -87,7 +103,14 @@ export function createChatbot(app) {
     },
     clear: {
       text: "Всегда рада помочь!",
-      buttons: [{ text: "Есть ещё вопрос", next: "start" }],
+      buttons: [{ text: "Есть ещё вопрос", next: "menu" }],
+    },
+    menu: {
+      text: "",
+      buttons: [
+        { text: "Узнать о пункте выдачи", next: "pickup" },
+        { text: "Не могу зайти в профиль", next: "profile" },
+      ],
     },
   };
 
@@ -115,7 +138,9 @@ export function createChatbot(app) {
     const step = dialogTree[stepKey];
     if (!step) return;
 
-    addMessage(step.text, "bot");
+    if (step.text && String(step.text).trim() !== "") {
+      addMessage(step.text, "bot");
+    }
 
     const btnWrapper = document.createElement("div");
     btnWrapper.className = "buttons-wrapper";
@@ -185,6 +210,7 @@ export function createChatbot(app) {
     chatList.style.display = "";
     chatBody.style.display = "flex";
     messagesContainer.innerHTML = "";
+    resetTogglerIconAndShow();
   }
 
   // === Обработчики ===
@@ -264,7 +290,6 @@ export function createChatbotToggler(app, chatbot) {
   const chatbotToggler = document.createElement("button");
   chatbotToggler.id = "chatbot-toggler";
 
-  // Вставляем корректный svg (взяла из твоего примера)
   chatbotToggler.innerHTML = `
     <span class="chatbot__icon-open">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
@@ -291,11 +316,16 @@ export function createChatbotToggler(app, chatbot) {
         chatbot.container.querySelector(".chat-body").style.display = "none";
         chatbot.container.querySelector(".header-info").style.display = "none";
         chatbot.container.querySelector(".header-left").textContent = "ЧАТЫ";
+
+        // на мобильных — прячем сам тогглер
+        // (его восстановит resetViewOnClose / resetTogglerIconAndShow при закрытии модалки)
+        chatbotToggler.style.display = "none";
       } else {
         chatbot.container.querySelector(".chat-list").style.display = "";
         chatbot.container.querySelector(".chat-body").style.display = "flex";
         chatbot.container.querySelector(".header-info").style.display = "";
         chatbot.container.querySelector(".header-left").textContent = "ЧАТЫ";
+
         // чистим и запускаем стартовый шаг
         const messages = chatbot.container.querySelector(".messages");
         messages.innerHTML = "";
@@ -305,7 +335,7 @@ export function createChatbotToggler(app, chatbot) {
     } else {
       // закрываем
       app.classList.remove("show-chatbot");
-      chatbot.resetViewOnClose?.();
+      chatbot.resetViewOnClose?.(); // внутри неё мы восстановим тогглер
     }
   });
 
