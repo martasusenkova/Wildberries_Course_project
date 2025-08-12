@@ -1,0 +1,320 @@
+.basket {
+    margin: auto;
+    padding: 10px;
+    min-width: 300px;
+    width: 80%;
+    max-width: 1200px;
+    background-color: #F6F6F9;
+    height: fit-content;
+    border-radius: 20px;
+    display: flex;
+    column-gap: 10px;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+
+    &__overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    &__container_empty {
+        width: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+        margin: 10px;
+        height: 300px;
+        background-color: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    &__container_fill {
+        width: 80%;
+        margin: 10px;
+        display: flex;
+        background-color: #F6F6F9;
+        flex-direction: column;
+        max-height: 80vh;
+        overflow-y: auto;
+        gap: 10px;
+        border-radius: 20px;
+        padding: 10px;
+    }
+
+    &__field_fill {
+        background-color: #FFFFFF;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+
+    &__title {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    &__subtitle {
+        font-size: 16px;
+        color: #868695;
+        text-align: center;
+    }
+
+    &__title_fill {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    &__subtitle_fill {
+        font-size: 14px;
+        color: #868695;
+        margin-bottom: 10px;
+    }
+
+    &__btn-home {
+        background-color: #a73afd;
+        border: 2px solid transparent;
+        border-radius: 12px;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 22px;
+        width: -webkit-fill-available;
+        text-align: center;
+        padding: 8px 18px 10px;
+    }
+
+    &__btn-home:hover {
+        background-color: #B04DFD;
+    }
+
+    &__image {
+        width: 72px;
+        height: 72px;
+        background-color: transparent;
+    }
+
+    &__itemDelivery {
+        color: #868695;
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    &__itemTitleProd {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    &__price-div {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &__cardDeletePhone {
+        width: 32px;
+        height: 32px;
+        background-color: transparent;
+        border: none;
+        background-size: 20px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url(../assets/basket/delete.svg);
+    }
+
+    &__cardDeletePhone:hover {
+        background-image: url(../assets/basket/delete_black.svg);
+    }
+
+    &__cardFavoritePhone {
+        //удалить при добавлении фичи
+        display: none;
+        //удалить при добавлении фичи
+        width: 32px;
+        height: 32px;
+        background-color: transparent;
+        border: none;
+        background-repeat: no-repeat;
+        background-size: 20px;
+        background-position: center;
+        background-image: url(../assets/basket/favorite.svg);
+    }
+
+    &__cardFavoritePhone:hover {
+        background-image: url(../assets/basket/favorite_black.svg);
+    }
+
+    &__cardCountIcons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__cardDesc {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__price-div_laptop {
+        display: none;
+    }
+
+    &__cardFavoriteLaptop {
+        display: none;
+    }
+
+    &__cardDeleteLaptop {
+        display: none;
+    }
+
+    &__cardIcons {
+        display: flex;
+    }
+
+    &__card {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        position: relative;
+        margin-bottom: 10px;
+
+        &__finalPrice {
+            color: rgb(255, 59, 48);
+            font-family: Roboto;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        &__initailPrice {
+            color: rgb(134, 134, 149);
+            font-family: Roboto;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 20px;
+            text-decoration: line-through;
+        }
+    }
+
+}
+
+.flex-space-b {
+    display: flex;
+    justify-content: space-between;
+}
+
+.non-active {
+    display: none;
+}
+
+.btn__count {
+    background-color: #f1f1f5;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    border: none;
+}
+
+.btn__count:hover {
+    background-color: #E8E8F0;
+}
+
+.cardCount {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cardInfo {
+    display: grid;
+    grid-template-columns: 106px auto;
+    gap: 10px;
+}
+
+.cardImg {
+    width: 106px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+@media (min-width: 1166px) {
+
+    .basket {
+
+        &__card {
+            display: grid;
+            grid-template-columns: auto 82px 150px;
+            column-gap: 15px;
+            align-items: start;
+        }
+
+        &__container_fill {
+            display: grid;
+            flex-direction: column;
+            gap: 30px;
+            grid-template-columns: 1fr 0.6fr;
+        }
+
+        &__price-div_phone {
+            display: none;
+        }
+
+        &__cardFavoritePhone {
+            display: none;
+        }
+
+        &__cardDeletePhone {
+            display: none;
+        }
+
+        &__price-div_laptop {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        &__cardFavoriteLaptop {
+            display: none;
+            // display: block; раскоментить при введение фичи
+            width: 32px;
+            height: 32px;
+            background-color: transparent;
+            border: none;
+            background-repeat: no-repeat;
+            background-size: 20px;
+            background-position: center;
+            background-image: url(../assets/basket/favorite.svg);
+        }
+
+        &__cardFavoriteLaptop:hover {
+            background-image: url(../assets/basket/favorite_black.svg);
+        }
+
+        &__cardDeleteLaptop {
+            display: block;
+            width: 32px;
+            height: 32px;
+            background-color: transparent;
+            border: none;
+            background-size: 20px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url(../assets/basket/delete.svg);
+        }
+
+        &__cardDeleteLaptop:hover {
+            background-image: url(../assets/basket/delete_black.svg);
+        }
+    }
+}

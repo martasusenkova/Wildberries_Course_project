@@ -38,6 +38,7 @@ header__btnBasket {
   background-position: center;
   padding-top: 40px;
   color: rgba(255, 255, 255, 0.6);
+  position: relative;
 }
 header__btnBasket:hover {
   color: #ffffff;
@@ -45,6 +46,16 @@ header__btnBasket:hover {
 
 .header {
   /* Обёртка для поиска */
+}
+.header__red-circle {
+  background-color: #f55123;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  color: #ffffff;
 }
 .header__wrapper {
   width: 100%;
@@ -165,6 +176,16 @@ header__btnBasket:hover {
   padding: 15px;
   z-index: 10;
 }
+.tabBar__red-circle {
+  background-color: #f55123;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  color: #ffffff;
+  right: 5px;
+}
 .tabBar__home {
   width: 50px;
   background-color: transparent;
@@ -183,6 +204,7 @@ header__btnBasket:hover {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  position: relative;
 }
 .tabBar__basket:hover {
   background-image: url(../assets/header-tab-svg/basket-hover.svg);

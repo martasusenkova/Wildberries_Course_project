@@ -1,6 +1,9 @@
 import { openModalWindow } from "./ProductCardModal.js";
 import { app } from "../main.js";
 import { toast, showToast } from "./toast.js";
+import { addProdInbasket } from "../js/localStorage.js";
+import { openBasket } from "./Basket.js";
+import { changeTextInRedCircle } from "./Header.js";
 
 export function getOrCreateContainer() {
   let container = document.querySelector(".productContainer");
@@ -39,9 +42,20 @@ export function createCard(products, container) {
       cardButton.classList.add("card__button-two");
     }
 
-    cardButton.addEventListener("click", () => {
-      changeText(cardButton);
-      showToast();
+    cardButton.addEventListener("click", (event) => {
+      const btn = event.currentTarget;
+      const id = btn.dataset.id;
+
+      if (!btn.classList.contains("card__button-two")) {
+        // Первый клик
+        changeText(btn);
+        addProdInbasket(id, 1);
+        showToast();
+        changeTextInRedCircle();
+      } else {
+        // Второй и последующие клики
+        openBasket();
+      }
     });
 
     cardButton.innerHTML =

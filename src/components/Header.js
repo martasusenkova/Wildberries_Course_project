@@ -1,3 +1,7 @@
+import { openBasket, countProducts } from "./Basket";
+import { countProdInBasket } from "../js/localStorage";
+
+let count = countProducts;
 // создание header
 export function createHeader() {
   const header = document.createElement("header");
@@ -40,6 +44,24 @@ export function createHeader() {
   const btnBasket = document.createElement("button");
   btnBasket.classList.add("header__btnBasket");
   btnBasket.innerHTML = "Корзина";
+  btnBasket.onclick = () => {
+    openBasket();
+  }
+
+  const countProds = document.createElement('div');
+  countProds.classList.add('header__red-circle');
+  countProds.id = 'countProdsH';
+  if (count < 100)
+    countProds.textContent = countProducts;
+  else
+    countProds.textContent = '99+';
+  if (count == 0) {
+    countProds.classList.add('non-active');
+  } else {
+    countProds.classList.remove('non-active');
+  }
+  btnBasket.append(countProds);
+  
 
   searchWrapper.append(inputSearch, label, fileInput);
   wrapper.append(logo, searchWrapper, btnBasket);
@@ -59,8 +81,43 @@ export function createTabBar() {
 
   const btnBasketTab = document.createElement("button");
   btnBasketTab.classList.add("tabBar__basket");
+  btnBasketTab.onclick = () => {
+    openBasket();
+  }
+  const countProds = document.createElement('div');
+  countProds.classList.add('tabBar__red-circle');
+  countProds.id = 'countProdsTB';
+  if (count < 100)
+    countProds.textContent = countProducts;
+  else
+    countProds.textContent = '99+';
+  if (count == 0) {
+    countProds.classList.add('non-active');
+  } else {
+    countProds.classList.remove('non-active');
+  }
+  btnBasketTab.append(countProds);
 
   tabBar.append(btnHome);
   tabBar.append(btnBasketTab);
   return { tabBar, btnBasketTab, btnHome };
+}
+
+export function changeTextInRedCircle() {
+  let count = countProdInBasket();
+  if (count < 100) {
+    document.getElementById('countProdsH').textContent = count;
+    document.getElementById('countProdsTB').textContent = count;
+  } else {
+    document.getElementById('countProdsH').textContent = '99+';
+    document.getElementById('countProdsTB').textContent = '99+';
+  }
+
+  if (count == 0) {
+    document.getElementById('countProdsH').classList.add('non-active');
+    document.getElementById('countProdsTB').classList.add('non-active');
+  } else {
+    document.getElementById('countProdsH').classList.remove('non-active');
+    document.getElementById('countProdsTB').classList.remove('non-active');
+  }
 }
