@@ -387,7 +387,7 @@ function createFillBasket() {
 }
 
 
-// создание пустой корзины
+// создание заказанной корзины
 function createSuccessfulOrder() {
     document.body.style.overflow = 'hidden';
     basket.classList.remove('non-active');
@@ -427,6 +427,7 @@ function createSuccessfulOrder() {
     });
     emptyBasketHome.onclick = () => {
         basket.classList.add('non-active');
+        document.body.style.overflow = '';
         overlay.remove();
     }
 
