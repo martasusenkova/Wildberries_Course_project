@@ -6,7 +6,7 @@ toast.textContent = 'Товар добавлен в корзину';
 
     export function showToast() {
       toast.classList.add("toast_show");
-      // Скрываем через 3 секунды
+      // Скрываем через 5 секунд
       setTimeout(() => {
         toast.classList.remove("toast_show");
       }, 5000);

@@ -51,6 +51,10 @@ export function handleSearch(query, container, emptyMessage, inputSearch) {
     subMessage.style.fontWeight = "400";
     subMessage.style.lineHeight = "22px";
     subMessage.style.opacity = "0.7";
+    
+    message.addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
 
     messageWrapper.appendChild(message);
     messageWrapper.appendChild(subMessage);
@@ -80,6 +84,13 @@ export function searchProducts(
       event.preventDefault();
 
       const query = inputSearch.value.trim();
+     
+      //  Если поле пустое — ничего не делаем, оставляем старый результат
+      if (query === "") {
+        console.log("Пустой запрос — оставляем предыдущий результат");
+        return;
+      }
+
       if (!query) return;
 
       slider.style.display = "none";

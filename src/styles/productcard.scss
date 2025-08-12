@@ -50,13 +50,13 @@
       display: block;
     }
   }
-
   &__price {
     display: flex;
     flex-direction: row;
     justify-content: left;
     align-items: center;
     gap: 20px;
+    padding-bottom: 5px;
   }
   &__finalPrice {
     color: #ff3b30;
@@ -95,9 +95,9 @@
   }
   &__brand {
     font-family: Roboto;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 14px;
-    height: 48px;
+    height: 20px;
     flex-shrink: 0;
   }
   &__name {
@@ -105,7 +105,7 @@
     font-family: Roboto;
     font-weight: 400;
     font-size: 14px;
-    height: 48px;
+    height: 20px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -158,13 +158,45 @@
   &__icon-path {
     fill: white;
   }
+  &__reviews{
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  height: 25px;
+  flex-shrink: 0;
+  padding-bottom: 5px;
+  }
+  &__opinion{
+  color: #9d9da5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  }
+  &__evaluation{
+  padding-right: 15px;
+  }
+  &__button-basket{
+  color: #ff3b30;
+  padding: 7px 5px 5px;
+  }
 }
-
+.card__evaluation::before{
+content: "\2605"; 
+  color: gold;    
+  margin-right: 5px; 
+  font-size: 1.2em;  
+}
 .card:hover {
   .card__show-button {
     opacity: 0.9;
   }
 }
+@media (max-width: 780px) {
+  .card__show-button{
+display: none;
+  }
+  }
 
 .container__margin {
   margin-top: 20px;
