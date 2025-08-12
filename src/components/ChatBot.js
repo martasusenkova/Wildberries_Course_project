@@ -210,6 +210,7 @@ export function createChatbot(app) {
     chatList.style.display = "";
     chatBody.style.display = "flex";
     messagesContainer.innerHTML = "";
+    document.body.style.overflow = "";
     resetTogglerIconAndShow();
   }
 
