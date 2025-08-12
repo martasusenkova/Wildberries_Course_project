@@ -8,20 +8,29 @@ import { searchProducts } from "./js/search.js";
 import { setupHomeClick } from "./components/HomeClick.js";
 import { toast } from "./components/toast.js";
 
-
 export const app = document.getElementById("app");
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const { header, inputSearch, logo } = createHeader();
+  const { header, logo, wrapper, searchWrapper, inputSearch, fileInput } =
+    createHeader();
   const { tabBar, btnBasketTab, btnHome } = createTabBar();
   const slider = createSlider();
   app.append(header, tabBar, slider, toast);
   
 try {
 const container = await initProductsInfinite(); // дождались контейнер
-searchProducts(inputSearch, slider, container); // передаём уже готовый контейнер
-setupHomeClick(logo, slider, inputSearch, container, btnHome);
+searchProducts(inputSearch, slider, container, searchWrapper, fileInput);
+  setupHomeClick(
+    logo,
+    slider,
+    inputSearch,
+    container,
+    btnHome,
+    searchWrapper,
+    fileInput
+  );
 } catch (e) {
 console.error('Ошибка инициализации контейнера:', e);
 }
 });
+
