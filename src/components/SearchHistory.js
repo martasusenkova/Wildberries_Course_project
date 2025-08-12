@@ -1,6 +1,7 @@
-const MAX_HISTORY = 5;
-const SEARCH_HISTORY_KEY = "searchHistory";
+export const MAX_HISTORY = 5;
+export const SEARCH_HISTORY_KEY = "searchHistory";
 
+// Сохранение истории поиска
 export function saveQueryToHistory(query) {
   if (!query) return;
 
@@ -26,6 +27,8 @@ export function getSearchHistory() {
 
 export function showSearchHistory(inputSearch) {
   const history = getSearchHistory();
+  if (!history.length) return;
+
   const dropdown = document.createElement("ul");
   dropdown.classList.add("search-history");
 
@@ -34,7 +37,7 @@ export function showSearchHistory(inputSearch) {
     li.textContent = item;
     li.classList.add("search-history-item");
 
-    li.addEventListener("click", () => {
+    li.addEventListener("mousedown", () => {
       inputSearch.value = item;
       inputSearch.focus();
       inputSearch.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter" }));
@@ -49,14 +52,3 @@ export function showSearchHistory(inputSearch) {
 
   inputSearch.parentElement.appendChild(dropdown);
 }
-
-inputSearch.addEventListener("input", () => {
-  showSearchHistory(inputSearch);
-});
-inputSearch.addEventListener("blur", () => {
-  // Немного отложим удаление, чтобы успел сработать клик
-  setTimeout(() => {
-    const old = document.querySelector(".search-history");
-    if (old) old.remove();
-  }, 200);
-});

@@ -46,12 +46,12 @@ export function createCard(products, container) {
       const btn = event.currentTarget;
       const id = btn.dataset.id;
 
-      if (!btn.classList.contains('card__button-two')) {
+      if (!btn.classList.contains("card__button-two")) {
         // Первый клик
         changeText(btn);
         addProdInbasket(id, 1);
         showToast();
-        changeTextInRedCircle()
+        changeTextInRedCircle();
       } else {
         // Второй и последующие клики
         openBasket();
@@ -78,9 +78,6 @@ export function createCard(products, container) {
       openModalWindow(cardId);
     }
   });
-
-  // НЕ добавляем контейнер в DOM, он уже должен быть там
-  // app.appendChild(container);
 
   return container;
 }

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 header {
   min-width: 80px;
   background: linear-gradient(90deg, #ed3cca, #7c1af8);
@@ -12,6 +13,12 @@ header {
   top: 0;
   z-index: 10;
 }
+header input[type=file] {
+  overflow: hidden;
+  border: 0;
+  background-color: transparent;
+  color: transparent;
+}
 header__logo {
   background-image: url(../assets/header-tab-svg/logoWb.svg);
   background-size: cover;
@@ -20,13 +27,6 @@ header__logo {
   height: 50px;
   width: 260px;
   display: none;
-}
-header__searchInput {
-  height: 40px;
-  width: 100%;
-  padding: 15px;
-  font-size: 15px;
-  border-radius: 15px;
 }
 header__btnBasket {
   display: none;
@@ -44,8 +44,11 @@ header__btnBasket:hover {
   color: #ffffff;
 }
 
+.header {
+  /* Обёртка для поиска */
+}
 .header__red-circle {
-  background-color: #F55123;
+  background-color: #f55123;
   height: 16px;
   width: 16px;
   border-radius: 50%;
@@ -75,12 +78,55 @@ header__btnBasket:hover {
   width: 260px;
   display: none;
 }
+.header__searchWrapper {
+  position: relative;
+  flex: 1;
+}
+.header__searchWrapper::after {
+  content: "";
+  cursor: pointer;
+  top: 4px;
+  right: 10px;
+  z-index: 30;
+  display: flex;
+  border: none;
+  width: 30px;
+  height: 30px;
+  font-size: 0;
+  line-height: 1;
+  position: absolute;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 4px;
+  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2028%2028%22%3E%3Cpath%20fill%3D%22%23C8C8D1%22%20fill-rule%3D%22evenodd%22%20d%3D%22m1.956%2020.53-.75-9.045c-.041-.493-.062-.74.004-.955.059-.19.165-.362.309-.5.162-.155.392-.247.851-.432l4.412-1.772c.281-.113.422-.17.54-.256.105-.076.196-.17.27-.276.083-.12.136-.262.242-.547l1.195-3.2c.164-.437.245-.656.387-.817.126-.142.284-.252.46-.32.202-.076.435-.076.902-.076h6.446c.467%200%20.7%200%20.9.076.178.068.336.178.462.32.141.161.223.38.386.818l1.195%203.2c.106.283.16.426.243.546.074.106.165.2.27.276.118.087.259.143.54.256l4.412%201.772c.459.185.688.277.851.432.144.138.25.31.308.5.067.215.046.462.005.955l-.75%209.046c-.15%201.812-.226%202.718-.627%203.403a3.5%203.5%200%200%201-1.51%201.39c-.717.343-1.626.343-3.444.343H7.537c-1.818%200-2.727%200-3.444-.343a3.5%203.5%200%200%201-1.51-1.39c-.401-.686-.477-1.591-.627-3.404Zm12.045-.695a3.88%203.88%200%200%200%203.873-3.89%203.88%203.88%200%200%200-3.873-3.888%203.88%203.88%200%200%200-3.872%203.889A3.88%203.88%200%200%200%2014%2019.835Z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E%0A);
+}
+.header__searchWrapper.is-searching::after {
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23C8C8D1' d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'/%3E%3C/svg%3E") !important;
+}
 .header__searchInput {
   height: 40px;
   width: 100%;
-  padding: 15px;
+  padding: 15px 45px 15px 15px;
   font-size: 15px;
   border-radius: 15px;
+}
+.header__searchLabel {
+  opacity: 0;
+  width: 10px;
+  height: 60px;
+}
+.header__photo-searchInput {
+  display: flex;
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  right: 2px;
+  top: -5px;
+  opacity: 0;
+  z-index: 60;
+  pointer-events: all;
 }
 .header__btnBasket {
   display: none;
@@ -97,6 +143,27 @@ header__btnBasket:hover {
   color: #ffffff;
 }
 
+.input-disabled {
+  pointer-events: none;
+}
+
+.clear-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 50;
+}
+
+.clear-btn-zone {
+  pointer-events: auto;
+}
+
 .tabBar {
   min-width: 80px;
   display: flex;
@@ -110,7 +177,7 @@ header__btnBasket:hover {
   z-index: 10;
 }
 .tabBar__red-circle {
-  background-color: #F55123;
+  background-color: #f55123;
   height: 16px;
   width: 16px;
   border-radius: 50%;
@@ -152,6 +219,10 @@ header__btnBasket:hover {
     max-width: 1504px;
     padding: 0 32px;
   }
+  .header__searchWrapper::after {
+    top: 14px;
+    right: 10px;
+  }
   .header__searchInput {
     height: 60px;
     font-size: 18px;
@@ -166,23 +237,67 @@ header__btnBasket:hover {
     display: none;
   }
 }
+/* История поиска теперь адаптируется к ширине инпута */
 .search-history {
   list-style: none;
-  padding: 20px 0 0;
-  margin-top: 5px;
-  background: white;
+  padding: 10px 0;
+  margin-top: 10px;
   border: 1px solid #ccc;
   position: absolute;
-  top: 0px;
+  top: 100%; /* прямо под инпутом */
+  left: 0;
   z-index: 1000;
-  width: 100%;
-  max-width: 1144px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  width: 100%; /* равна ширине .header__searchWrapper */
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.search-catalog__btn--clear {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  order: -1;
+  width: 40px;
+  height: 40px;
+  font-size: 0;
+  line-height: 1;
+  display: none;
+  position: relative;
+}
+
+.search-catalog__btn {
+  cursor: pointer;
+  background-color: transparent;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  font-size: 0;
+  line-height: 1;
+  transition: background-image 0.3s;
+  display: block;
+  position: relative;
 }
 
 .search-history-item {
   padding: 8px 12px;
   cursor: pointer;
+  display: flex;
+}
+
+.search-history-item::before {
+  content: "";
+  z-index: 30;
+  position: relative;
+  display: flex;
+  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22%23A9A8B0%22%20fill-rule%3D%22evenodd%22%20d%3D%22M7.333%201.334a6%206%200%201%200%203.745%2010.688l2.784%202.783a.667.667%200%200%200%20.943-.942l-2.784-2.784a6%206%200%200%200-4.688-9.745Zm-4.666%206a4.667%204.667%200%201%201%209.333%200%204.667%204.667%200%200%201-9.333%200Z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E);
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin: 0 16px 0 8px;
 }
 
 .search-history-item:hover {
