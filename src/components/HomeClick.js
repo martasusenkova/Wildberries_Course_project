@@ -16,16 +16,18 @@ export function setupHomeClick(
     inputSearch.value = "";
     setLastQuery("");
 
-    container.innerHTML = ""; // очищаем перед рендером
+    if (container) {
+      container.innerHTML = ""; // очищаем перед рендером
 
-    const emptyMessage = container.querySelector(".emptyMessage");
-    if (emptyMessage) emptyMessage.remove();
+      const emptyMessage = container.querySelector(".emptyMessage");
+      if (emptyMessage) emptyMessage.remove();
 
-    searchWrapper.classList.remove("is-searching");
-    fileInput.classList.remove("input-disabled"); // возвращаем приём фото
+      const products = getProductCards();
+      createCard(products, container);
+    }
 
-    const products = getProductCards();
-    createCard(products, container);
+    if (searchWrapper) searchWrapper.classList.remove("is-searching");
+    if (fileInput) fileInput.classList.remove("input-disabled");
   }
 
   logo.addEventListener("click", goHome);

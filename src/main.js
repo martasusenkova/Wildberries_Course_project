@@ -6,7 +6,7 @@ import "./styles/slider.scss";
 import "./components/Slider.js";
 import { searchProducts } from "./js/search.js";
 import { setupHomeClick } from "./components/HomeClick.js";
-import { toast } from "./components/toast.js";
+import { toast } from "./components/Toast.js";
 
 export const app = document.getElementById("app");
 
@@ -16,21 +16,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   const { tabBar, btnBasketTab, btnHome } = createTabBar();
   const slider = createSlider();
   app.append(header, tabBar, slider, toast);
-  
-try {
-const container = initProductsInfinite();
-searchProducts(inputSearch, slider, container, searchWrapper, fileInput);
-  setupHomeClick(
-    logo,
-    slider,
-    inputSearch,
-    container,
-    btnHome,
-    searchWrapper,
-    fileInput
-  );
-} catch (e) {
-console.error('Ошибка инициализации контейнера:', e);
-}
-});
 
+  try {
+    // ждём, пока контейнер и продукты инициализируются
+    const container = await initProductsInfinite();
+
+    // только потом подключаем поиск
+    searchProducts(inputSearch, slider, container, searchWrapper, fileInput);
+
+    setupHomeClick(
+      logo,
+      slider,
+      inputSearch,
+      container,
+      btnHome,
+      searchWrapper,
+      fileInput
+    );
+  } catch (e) {
+    console.error("Ошибка инициализации контейнера:", e);
+  }
+});
