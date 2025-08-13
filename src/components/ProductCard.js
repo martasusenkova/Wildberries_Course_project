@@ -177,11 +177,11 @@ function setupObserver(loader, callback) {
     }, 200));
   }
 }
-async function renderNextBatch(container, loader, first = false) {
+function renderNextBatch(container, loader, first = false) {
   if (state.loading || state.done) return;
   state.loading = true;
 
-  await delay(500);
+  // await delay(500);
   const slice = state.allProducts.slice(state.offset, state.offset + BATCH_SIZE);
   if (slice.length === 0) {
     state.offset = 0;
@@ -210,7 +210,7 @@ async function renderNextBatch(container, loader, first = false) {
     renderNextBatch(container, loader, true);
   }
 }
-export async function initProductsInfinite() {
+export function initProductsInfinite() {
   const container = getOrCreateContainer();
   const loader = getOrCreateLoader();
 
