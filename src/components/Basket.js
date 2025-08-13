@@ -57,6 +57,19 @@ function createEmptyBasket() {
   emptyBasket.append(emptyBasketSubtitle);
   emptyBasket.append(emptyBasketHome);
 
+  emptyBasketHome.onclick = () => {
+    basket.classList.add("non-active");
+    document.body.style.overflow = "";
+    overlay.remove();
+
+    // **сбрасываем все кнопки товаров**
+    document.dispatchEvent(
+      new CustomEvent("cart:change", {
+        detail: { id: null, inCart: false }, // null = для всех
+      })
+    );
+  };
+
   // Обёртка для фона
   const overlay = document.createElement("div");
   overlay.classList.add("basket__overlay");
