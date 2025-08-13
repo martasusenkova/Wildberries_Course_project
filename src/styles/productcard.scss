@@ -131,7 +131,7 @@
     font-size: 16px;
   }
   &__button-two {
-    background-color: #eedcea;
+    background-color: #f9aaff;
     color: #6f2dbd;
     font-weight: 800;
   }
@@ -153,12 +153,13 @@
     font-size: 16px;
   }
   &__icon {
-    fill: white;
+    fill: rgb(255, 255, 255);
     transition: fill 0.3s;
   }
   &__icon-path {
-    fill: white;
+    fill: rgb(255, 255, 255);
   }
+
   &__reviews {
     font-family: Roboto;
     font-weight: 500;

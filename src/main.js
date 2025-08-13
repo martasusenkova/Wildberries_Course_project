@@ -1,12 +1,16 @@
 import { createHeader, createTabBar } from "./components/Header.js";
 import { createSlider } from "./components/Slider.js";
-import { initProductsInfinite } from "./components/ProductCard.js";
+import {
+  initProductsInfinite,
+  destroyProductsInfinite,
+} from "./components/ProductCard.js";
 import "./styles/style.scss";
 import "./styles/slider.scss";
 import "./components/Slider.js";
 import { searchProducts } from "./js/search.js";
 import { setupHomeClick } from "./components/HomeClick.js";
 import { toast } from "./components/Toast.js";
+import { createChatbot, createChatbotToggler } from "./components/ChatBot.js";
 
 export const app = document.getElementById("app");
 
@@ -16,6 +20,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const { tabBar, btnBasketTab, btnHome } = createTabBar();
   const slider = createSlider();
   app.append(header, tabBar, slider, toast);
+  // Создаём чат-бот и кнопку toggler
+  const chatbot = createChatbot(app); // передаём DOM-элемент app
+  createChatbotToggler(app, chatbot); // передаём app и объект чат-бота
 
   try {
     // ждём, пока контейнер и продукты инициализируются
