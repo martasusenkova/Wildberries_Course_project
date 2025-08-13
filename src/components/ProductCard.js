@@ -137,11 +137,14 @@ export function createCard(products, container, options = {}) {
     cardButton.addEventListener("click", (event) => {
       const btn = event.currentTarget;
       const id = btn.dataset.id;
+      const icon = btn.querySelector(".card__icon"); // находим SVG
 
       if (!btn.classList.contains("card__button-two")) {
         const p = btn.querySelector("p");
         if (p) p.textContent = "В корзине!";
         btn.classList.add("card__button-two");
+
+        if (icon) icon.style.display = "none"; // скрываем иконку
 
         addProdInbasket(id, 1);
         showToast();
