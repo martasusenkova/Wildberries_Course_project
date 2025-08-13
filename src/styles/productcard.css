@@ -8,9 +8,14 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  width: 100%;
+  height: 100%;
 }
 
 .productContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
   max-width: 1440px;
   margin: 0 auto;
   grid-template-columns: repeat(2, calc(50% - 4px));
@@ -19,7 +24,12 @@
   display: grid;
   justify-content: center;
   align-items: stretch;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
+}
+
+.wide-container {
+  height: 100vh !important;
+  background-color: #ffffff;
 }
 
 .card {
@@ -54,6 +64,7 @@
   justify-content: left;
   align-items: center;
   gap: 20px;
+  padding-bottom: 5px;
 }
 .card__finalPrice {
   color: #ff3b30;
@@ -93,9 +104,9 @@
 }
 .card__brand {
   font-family: Roboto;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 14px;
-  height: 48px;
+  height: 20px;
   flex-shrink: 0;
 }
 .card__name {
@@ -103,7 +114,7 @@
   font-family: Roboto;
   font-weight: 400;
   font-size: 14px;
-  height: 48px;
+  height: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -156,11 +167,45 @@
 .card__icon-path {
   fill: white;
 }
+.card__reviews {
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  height: 25px;
+  flex-shrink: 0;
+  padding-bottom: 5px;
+}
+.card__opinion {
+  color: #9d9da5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.card__evaluation {
+  padding-right: 15px;
+}
+.card__button-basket {
+  color: #ff3b30;
+  padding: 7px 5px 5px;
+}
+
+.card__evaluation::before {
+  content: "★";
+  color: gold;
+  margin-right: 5px;
+  font-size: 1.2em;
+}
 
 .card:hover .card__show-button {
   opacity: 0.9;
 }
 
+@media (max-width: 780px) {
+  .card__show-button {
+    display: none;
+  }
+}
 .container__margin {
   margin-top: 20px;
 }
@@ -170,8 +215,8 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  grid-column: 1/-1; /* сообщение занимает всю ширину */
-  grid-row: 1/span 2; /* максимум первые две строки */
+  grid-column: 1/-1;
+  grid-row: 1/span 2;
 }
 
 .emptyMessage {
@@ -186,13 +231,11 @@
   width: fit-content;
   max-width: 350px;
   max-width: 600px;
-  /* Центрируем по горизонтали, если нужно */
-  justify-self: start; /* или center — если хочешь по центру */
-  /* Ограничиваем по строкам */
+  justify-self: start;
 }
 
 .emptyMessage-sub {
-  justify-self: start; /* или center — если хочешь по центру */
+  justify-self: start;
 }
 
 .containerEmptyWrapper::before {
@@ -230,4 +273,56 @@
     -moz-column-gap: 15px;
          column-gap: 15px;
   }
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(720deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  30% {
+    stroke-dashoffset: 45;
+  }
+  100% {
+    stroke-dashoffset: 187;
+  }
+}
+@keyframes colors {
+  0% {
+    stroke: #ec4df0;
+  }
+  25% {
+    stroke: #e639ca;
+  }
+  50% {
+    stroke: #ac43fe;
+  }
+  75% {
+    stroke: #7a18dd;
+  }
+  100% {
+    stroke: #ec4df0;
+  }
+}
+.loader {
+  animation: spinner 1.4s linear infinite;
+  width: 64px;
+  height: 64px;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+.path {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 187;
+  transform-origin: center;
+  animation: dash 1.4s linear infinite, colors 5.6s ease-in-out infinite;
 }/*# sourceMappingURL=productcard.css.map */

@@ -2,32 +2,34 @@ import { getProductCards } from "../js/api.js";
 import { createCard } from "./ProductCard.js";
 import { setLastQuery } from "../js/search.js";
 
-export function setupHomeClick(logo, slider, inputSearch, container, btnHome) {
-  logo.addEventListener("click", () => {
+export function setupHomeClick(
+  logo,
+  slider,
+  inputSearch,
+  container,
+  btnHome,
+  searchWrapper,
+  fileInput
+) {
+  function goHome() {
     slider.style.display = "block";
     inputSearch.value = "";
     setLastQuery("");
 
-    container.innerHTML = ""; // очищаем перед рендером
+    if (container) {
+      container.innerHTML = ""; // очищаем перед рендером
 
-    const emptyMessage = container.querySelector(".emptyMessage");
-    if (emptyMessage) emptyMessage.remove();
+      const emptyMessage = container.querySelector(".emptyMessage");
+      if (emptyMessage) emptyMessage.remove();
 
-    const products = getProductCards();
-    createCard(products, container);
-  });
+      const products = getProductCards();
+      createCard(products, container);
+    }
 
-  btnHome.addEventListener("click", () => {
-    slider.style.display = "block";
-    inputSearch.value = "";
-    setLastQuery("");
+    if (searchWrapper) searchWrapper.classList.remove("is-searching");
+    if (fileInput) fileInput.classList.remove("input-disabled");
+  }
 
-    container.innerHTML = ""; // очищаем перед рендером
-
-    const emptyMessage = container.querySelector(".emptyMessage");
-    if (emptyMessage) emptyMessage.remove();
-
-    const products = getProductCards();
-    createCard(products, container);
-  });
+  logo.addEventListener("click", goHome);
+  btnHome.addEventListener("click", goHome);
 }
