@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   app.append(header, tabBar, slider, toast);
   
 try {
-const container = await initProductsInfinite(); // дождались контейнер
+const container = initProductsInfinite();
 searchProducts(inputSearch, slider, container, searchWrapper, fileInput);
   setupHomeClick(
     logo,

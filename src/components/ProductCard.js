@@ -151,10 +151,10 @@ export function createCard(products, container, options = {}) {
 }
 // делаем контейнер, который будет внизу страницы и сигнализировать, когда пересекает область видимости
 function getOrCreateLoader() {
-  let loader = document.querySelector(".loader");
+  let loader = document.querySelector(".loader-scroll");
   if (!loader) {
     loader = document.createElement("div");
-    loader.className = "loader";
+    loader.className = "loader-scroll";
     loader.setAttribute("role", "status");
     loader.style.cssText = "padding:16px;color:#666;text-align:center";
     loader.textContent = "Загрузка…";
