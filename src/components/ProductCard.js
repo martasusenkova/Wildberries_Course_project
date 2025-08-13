@@ -40,39 +40,51 @@ function getOrCreateContainer() {
 // ======================== Глобальный слушатель корзины ========================
 document.addEventListener("cart:change", (e) => {
   const { id, inCart } = e.detail || {};
-  if (!id) return;
 
-  const pageButtons = document.querySelectorAll(
-    `.card__button[data-id="${id}"]`
-  );
+  let pageButtons;
+  if (id) {
+    pageButtons = document.querySelectorAll(`.card__button[data-id="${id}"]`);
+  } else {
+    // если id нет — обновляем все кнопки
+    pageButtons = document.querySelectorAll(".card__button");
+  }
+
   pageButtons.forEach((btn) => {
     const p = btn.querySelector("p");
     if (inCart) {
       if (p) p.textContent = "В корзине!";
       btn.classList.add("card__button-two");
     } else {
-      if (p) p.textContent = "Корзина";
+      if (p) p.textContent = "Добавить в корзину"; // <- сбрасываем текст
       btn.classList.remove("card__button-two");
     }
   });
 
-  const modalBtn = document.querySelector(
-    `.m-content__card__content__info__btns__basket[data-id="${id}"]`
-  );
-  if (modalBtn) {
+  const modalBtns = id
+    ? [
+        document.querySelector(
+          `.m-content__card__content__info__btns__basket[data-id="${id}"]`
+        ),
+      ]
+    : document.querySelectorAll(
+        `.m-content__card__content__info__btns__basket`
+      );
+
+  modalBtns.forEach((modalBtn) => {
+    if (!modalBtn) return;
     const buy = document.querySelector(
-      `.m-content__card__content__info__btns__buy[data-id="${id}"]`
+      `.m-content__card__content__info__btns__buy[data-id="${modalBtn.dataset.id}"]`
     );
     if (inCart) {
       modalBtn.textContent = "Перейти в корзину!";
       modalBtn.classList.add("card__button-two");
       if (buy) buy.style.display = "none";
     } else {
-      modalBtn.textContent = "Добавить в корзину";
+      modalBtn.textContent = "Добавить в корзину"; // <- сброс текста
       modalBtn.classList.remove("card__button-two");
       if (buy) buy.style.display = "";
     }
-  }
+  });
 });
 
 // ======================== Создание карточек ========================

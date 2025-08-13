@@ -487,4 +487,11 @@ function createSuccessfulOrder() {
 
   basket.append(overlay);
   app.append(basket);
+
+  // **сбрасываем все кнопки товаров на "Добавить в корзину"**
+  document.dispatchEvent(
+    new CustomEvent("cart:change", {
+      detail: { id: null, inCart: false }, // null = для всех
+    })
+  );
 }
