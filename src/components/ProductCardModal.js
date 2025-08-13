@@ -1,6 +1,6 @@
 import { app } from "../main.js";
 import { getCard } from "../js/utils";
-import { showToast } from "./toast.js";
+import { showToast } from "./Toast.js";
 import { addProdInbasket } from "../js/localStorage.js";
 import { openBasket } from "./Basket.js";
 import { changeTextInRedCircle } from "./Header.js";
@@ -125,7 +125,9 @@ export function modalWindow(cardId) {
       showToast();
       changeTextInRedCircle();
       document.dispatchEvent(
-        new CustomEvent("cart:change", { detail: { id: product.id, inCart: true } })
+        new CustomEvent("cart:change", {
+          detail: { id: product.id, inCart: true },
+        })
       );
     } else {
       cleanup();
@@ -138,7 +140,9 @@ export function modalWindow(cardId) {
     showToast();
     changeTextInRedCircle();
     document.dispatchEvent(
-      new CustomEvent("cart:change", { detail: { id: product.id, inCart: true } })
+      new CustomEvent("cart:change", {
+        detail: { id: product.id, inCart: true },
+      })
     );
     cleanup();
     openBasket();

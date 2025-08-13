@@ -29,6 +29,7 @@
 
 .wide-container {
   height: 100vh !important;
+  background-color: #ffffff;
 }
 
 .card {
