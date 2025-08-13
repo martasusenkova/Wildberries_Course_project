@@ -6,7 +6,7 @@ import "./styles/slider.scss";
 import "./components/Slider.js";
 import { searchProducts } from "./js/search.js";
 import { setupHomeClick } from "./components/HomeClick.js";
-import { toast } from "./components/toast.js";
+import { toast } from "./components/Toast.js";
 import { createChatbot, createChatbotToggler } from "./components/ChatBot.js";
 
 export const app = document.getElementById("app");
