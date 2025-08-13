@@ -51,12 +51,15 @@ document.addEventListener("cart:change", (e) => {
 
   pageButtons.forEach((btn) => {
     const p = btn.querySelector("p");
+    const icon = btn.querySelector(".card__icon"); // находим иконку
     if (inCart) {
       if (p) p.textContent = "В корзине!";
       btn.classList.add("card__button-two");
+      if (icon) icon.style.display = "none"; // скрываем иконку
     } else {
-      if (p) p.textContent = "Добавить в корзину"; // <- сбрасываем текст
+      if (p) p.textContent = "Добавить в корзину"; // сбрасываем текст
       btn.classList.remove("card__button-two");
+      if (icon) icon.style.display = ""; // показываем иконку обратно
     }
   });
 
@@ -80,7 +83,7 @@ document.addEventListener("cart:change", (e) => {
       modalBtn.classList.add("card__button-two");
       if (buy) buy.style.display = "none";
     } else {
-      modalBtn.textContent = "Добавить в корзину"; // <- сброс текста
+      modalBtn.textContent = "Добавить в корзину";
       modalBtn.classList.remove("card__button-two");
       if (buy) buy.style.display = "";
     }
@@ -143,8 +146,6 @@ export function createCard(products, container, options = {}) {
         const p = btn.querySelector("p");
         if (p) p.textContent = "В корзине!";
         btn.classList.add("card__button-two");
-
-        if (icon) icon.style.display = "none"; // скрываем иконку
 
         addProdInbasket(id, 1);
         showToast();
