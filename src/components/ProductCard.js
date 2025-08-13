@@ -1,5 +1,4 @@
 import { openModalWindow } from "./ProductCardModal.js";
-import { app } from "../main.js";
 import { showToast } from "./Toast.js";
 import { addProdInbasket } from "../js/localStorage.js";
 import { openBasket } from "./Basket.js";
@@ -12,9 +11,10 @@ const BATCH_SIZE = 20;
 const state = {
   allProducts: [],
   offset: 0,
-  done: false,
+  done: false, //  used только если нет продуктов вообще
   loading: false,
   observer: null,
+  scrollHandler: null, // для fallback
 };
 export { state };
 
@@ -24,7 +24,8 @@ function getOrCreateContainer() {
   if (!container) {
     container = document.createElement("div");
     container.classList.add("productContainer");
-    app.appendChild(container);
+    const root = document.getElementById("app") || document.body;
+    root.appendChild(container);
   }
 
   container.addEventListener("click", (event) => {
@@ -45,21 +46,20 @@ document.addEventListener("cart:change", (e) => {
   if (id) {
     pageButtons = document.querySelectorAll(`.card__button[data-id="${id}"]`);
   } else {
-    // если id нет — обновляем все кнопки
     pageButtons = document.querySelectorAll(".card__button");
   }
 
   pageButtons.forEach((btn) => {
     const p = btn.querySelector("p");
-    const icon = btn.querySelector(".card__icon"); // находим иконку
+    const icon = btn.querySelector(".card__icon");
     if (inCart) {
       if (p) p.textContent = "В корзине!";
       btn.classList.add("card__button-two");
-      if (icon) icon.style.display = "none"; // скрываем иконку
+      if (icon) icon.style.display = "none";
     } else {
-      if (p) p.textContent = "Добавить в корзину"; // сбрасываем текст
+      if (p) p.textContent = "Добавить в корзину";
       btn.classList.remove("card__button-two");
-      if (icon) icon.style.display = ""; // показываем иконку обратно
+      if (icon) icon.style.display = "";
     }
   });
 
@@ -140,12 +140,14 @@ export function createCard(products, container, options = {}) {
     cardButton.addEventListener("click", (event) => {
       const btn = event.currentTarget;
       const id = btn.dataset.id;
-      const icon = btn.querySelector(".card__icon"); // находим SVG
+      const icon = btn.querySelector(".card__icon");
 
       if (!btn.classList.contains("card__button-two")) {
         const p = btn.querySelector("p");
         if (p) p.textContent = "В корзине!";
         btn.classList.add("card__button-two");
+
+        if (icon) icon.style.display = "none";
 
         addProdInbasket(id, 1);
         showToast();
@@ -174,7 +176,7 @@ export function createCard(products, container, options = {}) {
 }
 
 // ======================== Лоадер ========================
-function getOrCreateLoader() {
+function getOrCreateLoader(container) {
   let loader = document.querySelector(".loader-scroll");
   if (!loader) {
     loader = document.createElement("div");
@@ -182,13 +184,39 @@ function getOrCreateLoader() {
     loader.setAttribute("role", "status");
     loader.style.cssText = "padding:16px;color:#666;text-align:center";
     loader.textContent = "Загрузка…";
-    app.appendChild(loader);
+    // вставляем loader прямо после контейнера
+    if (container && container.parentNode) {
+      container.parentNode.insertBefore(loader, container.nextSibling);
+    } else {
+      (document.getElementById("app") || document.body).appendChild(loader);
+    }
+  } else {
+    // переместим loader рядом с контейнером, если нужно
+    if (container && loader.parentNode !== container.parentNode) {
+      if (loader.parentNode) loader.parentNode.removeChild(loader);
+      container.parentNode.insertBefore(loader, container.nextSibling);
+    }
   }
   return loader;
 }
 
 // ======================== Observer ========================
 function setupObserver(loader, callback) {
+  // отключаем старый observer, если есть
+  if (state.observer) {
+    try {
+      state.observer.disconnect();
+    } catch {}
+    state.observer = null;
+  }
+  // удаляем старый scrollHandler если был
+  if (state.scrollHandler) {
+    try {
+      window.removeEventListener("scroll", state.scrollHandler);
+    } catch {}
+    state.scrollHandler = null;
+  }
+
   if ("IntersectionObserver" in window) {
     state.observer = new IntersectionObserver(
       (entries) => {
@@ -200,65 +228,134 @@ function setupObserver(loader, callback) {
     );
     state.observer.observe(loader);
   } else {
-    window.addEventListener(
-      "scroll",
-      throttle(() => {
-        const nearBottom =
-          window.innerHeight + window.scrollY >=
-          document.body.offsetHeight - 600;
-        if (nearBottom) callback();
-      }, 200)
-    );
+    // fallback на scroll
+    const handler = throttle(() => {
+      const nearBottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 600;
+      if (nearBottom) callback();
+    }, 200);
+    state.scrollHandler = handler;
+    window.addEventListener("scroll", handler);
   }
 }
 
 // ======================== Подгрузка следующей партии ========================
 async function renderNextBatch(container, loader, first = false) {
-  if (state.loading || state.done) return;
+  if (state.loading) return;
   state.loading = true;
 
   loader.textContent = "Загрузка…";
 
   await delay(500);
 
-  const slice = state.allProducts.slice(
+  // отладочные логи
+  console.log(
+    "[Infinite] offset:",
     state.offset,
-    state.offset + BATCH_SIZE
+    " total:",
+    state.allProducts ? state.allProducts.length : 0
   );
-  if (slice.length === 0) {
+
+  if (!state.allProducts || state.allProducts.length === 0) {
+    // нет данных вообще — пометим как закончено
     state.done = true;
     loader.textContent = "Больше товаров нет";
     state.loading = false;
+    if (state.observer) {
+      try {
+        state.observer.disconnect();
+      } catch {}
+      state.observer = null;
+    }
     return;
   }
 
+  // получаем слайс; если он пуст (дошли до конца), сбрасываем offset в 0 и пробуем снова
+  let slice = state.allProducts.slice(state.offset, state.offset + BATCH_SIZE);
+
+  if (slice.length === 0) {
+    // достигли конца, но есть продукты — сбрасываемся и снова берём партию
+    console.log("[Infinite] reached end, looping to start");
+    state.offset = 0;
+    slice = state.allProducts.slice(0, BATCH_SIZE);
+    // если всё ещё пусто — завершаем
+    if (!slice || slice.length === 0) {
+      state.done = true;
+      loader.textContent = "Больше товаров нет";
+      state.loading = false;
+      if (state.observer) {
+        try {
+          state.observer.disconnect();
+        } catch {}
+        state.observer = null;
+      }
+      return;
+    }
+  }
+
+  // рендерим партию
   createCard(slice, container, { append: !first });
   state.offset += slice.length;
 
   loader.textContent = "";
   state.loading = false;
 
+  // если после добавления содержимого страница всё ещё короче экрана — грузим ещё (рекурсивно)
   if (document.body.offsetHeight < window.innerHeight && !state.done) {
-    renderNextBatch(container, loader, true);
+    await renderNextBatch(container, loader, false);
   }
 }
 
-// ======================== Инициализация ========================
+// ======================== Управление инициализацией ========================
+export function destroyProductsInfinite() {
+  try {
+    if (state.observer) {
+      state.observer.disconnect();
+      state.observer = null;
+    }
+  } catch (err) {}
+  // удаляем loader, если есть
+  const loader = document.querySelector(".loader-scroll");
+  if (loader) {
+    try {
+      loader.remove();
+    } catch {}
+  }
+  // удаляем scrollHandler если есть
+  if (state.scrollHandler) {
+    try {
+      window.removeEventListener("scroll", state.scrollHandler);
+    } catch {}
+    state.scrollHandler = null;
+  }
+
+  state.allProducts = [];
+  state.offset = 0;
+  state.done = false;
+  state.loading = false;
+}
+
 export async function initProductsInfinite() {
+  destroyProductsInfinite();
+
   const container = getOrCreateContainer();
-  const loader = getOrCreateLoader();
+  const loader = getOrCreateLoader(container);
 
   state.offset = 0;
   state.done = false;
   state.loading = false;
 
-  if (state.observer) {
-    state.observer.disconnect();
-    state.observer = null;
+  // Загружаем ВСЕ товары из API (getProductCards теперь асинхронный)
+  try {
+    state.allProducts = await getProductCards();
+    console.log("[Infinite] loaded products:", state.allProducts?.length);
+  } catch (err) {
+    console.error("[Infinite] failed to load products:", err);
+    state.allProducts = [];
   }
 
-  state.allProducts = await getProductCards(); // асинхронно
   await renderNextBatch(container, loader, true);
+
   setupObserver(loader, () => renderNextBatch(container, loader, false));
 
   return container;

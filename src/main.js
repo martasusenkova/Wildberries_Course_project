@@ -1,6 +1,9 @@
 import { createHeader, createTabBar } from "./components/Header.js";
 import { createSlider } from "./components/Slider.js";
-import { initProductsInfinite } from "./components/ProductCard.js";
+import {
+  initProductsInfinite,
+  destroyProductsInfinite,
+} from "./components/ProductCard.js";
 import "./styles/style.scss";
 import "./styles/slider.scss";
 import "./components/Slider.js";

@@ -1,5 +1,7 @@
-import { getProductCards } from "../js/api.js";
-import { createCard } from "./ProductCard.js";
+import {
+  initProductsInfinite,
+  destroyProductsInfinite,
+} from "./ProductCard.js";
 import { setLastQuery } from "../js/search.js";
 
 export function setupHomeClick(
@@ -11,39 +13,41 @@ export function setupHomeClick(
   searchWrapper,
   fileInput
 ) {
-  // утилита: мы на экране поиска?
-  const isInSearch = () => {
-    const hasClass = !!(
-      searchWrapper && searchWrapper.classList.contains("is-searching")
-    );
-    const hasQuery = !!(inputSearch && inputSearch.value.trim().length);
-    return hasClass || hasQuery;
-  };
+  async function goHomeIfSearching() {
+    // если НЕ в поиске — ничего не делаем
+    if (!searchWrapper?.classList.contains("is-searching")) return;
 
-  // отрисовка главной
-  const renderHome = () => {
-    slider.style.display = "block";
+    // UI: сразу переключаем видимость слайдера и очищаем поле поиска
+    if (slider) slider.style.display = "block";
     if (inputSearch) inputSearch.value = "";
     if (typeof setLastQuery === "function") setLastQuery("");
 
-    if (container) {
-      container.innerHTML = "";
-      const emptyMessage = container.querySelector(".emptyMessage");
-      if (emptyMessage) emptyMessage.remove();
-
-      const products = getProductCards();
-      createCard(products, container);
+    // Отключаем старый инфинити и очищаем контейнер
+    try {
+      destroyProductsInfinite();
+    } catch (err) {
+      console.warn("destroyProductsInfinite failed:", err);
     }
 
-    if (searchWrapper) searchWrapper.classList.remove("is-searching");
-    if (fileInput) fileInput.classList.remove("input-disabled");
-  };
+    if (container) {
+      container.innerHTML = "";
+    }
 
-  // переход на главную — только если мы действительно в поиске
-  const goHomeIfSearching = () => {
-    if (!isInSearch()) return; // уже на главной — ничего не делаем
-    renderHome();
-  };
+    // Сбрасываем стили поиска
+    searchWrapper?.classList.remove("is-searching");
+    fileInput?.classList.remove("input-disabled");
+
+    // Перезапускаем инфинити (ВЫЗЫВАЕМ БЕЗ АРГУМЕНТОВ, если у initProductsInfinite нет параметров)
+    try {
+      await initProductsInfinite(); // <- если у тебя сигнатура без аргументов
+      // либо, если у тебя initProductsInfinite принимает id: await initProductsInfinite(container?.id);
+    } catch (err) {
+      console.error("Ошибка при инициализации продуктов:", err);
+    }
+
+    // опционально — прокрутка вверх
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
 
   logo.addEventListener("click", goHomeIfSearching);
   btnHome.addEventListener("click", goHomeIfSearching);
