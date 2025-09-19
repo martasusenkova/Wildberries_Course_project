@@ -10,7 +10,6 @@ export async function getProductCards() {
     try {
       localStorage.setItem("cards", JSON.stringify(data));
     } catch (err) {
-      // не критично если localStorage недоступен
       console.warn("Не удалось записать в localStorage:", err);
     }
 
