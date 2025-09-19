@@ -20,7 +20,7 @@ header input[type=file] {
   color: transparent;
 }
 header__logo {
-  background-image: url(../assets/header-tab-svg/logoWb.svg);
+  background-image: url(/header-tab-svg/logoWb.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -32,7 +32,7 @@ header__btnBasket {
   display: none;
   height: 40px;
   background-color: transparent;
-  background-image: url(../assets/header-tab-svg/basket.svg);
+  background-image: url(/header-tab-svg/basket.svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -70,7 +70,7 @@ header__btnBasket:hover {
   position: relative;
 }
 .header__logo {
-  background-image: url(../assets/header-tab-svg/logoWb.svg);
+  background-image: url(/header-tab-svg/logoWb.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -132,7 +132,7 @@ header__btnBasket:hover {
   display: none;
   height: 40px;
   background-color: transparent;
-  background-image: url(../assets/header-tab-svg/basket.svg);
+  background-image: url(/header-tab-svg/basket.svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -189,25 +189,25 @@ header__btnBasket:hover {
 .tabBar__home {
   width: 50px;
   background-color: transparent;
-  background-image: url(../assets/header-tab-svg/home-gray.svg);
+  background-image: url(/header-tab-svg/home-gray.svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 .tabBar__home:hover {
-  background-image: url(../assets/header-tab-svg/home-hover.svg);
+  background-image: url(/header-tab-svg/home-hover.svg);
 }
 .tabBar__basket {
   width: 50px;
   background-color: transparent;
-  background-image: url(../assets/header-tab-svg/basket-gray.svg);
+  background-image: url(/header-tab-svg/basket-gray.svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
 }
 .tabBar__basket:hover {
-  background-image: url(../assets/header-tab-svg/basket-hover.svg);
+  background-image: url(/header-tab-svg/basket-hover.svg);
 }
 
 @media (min-width: 1024px) {

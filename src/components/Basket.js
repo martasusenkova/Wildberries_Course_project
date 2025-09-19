@@ -53,7 +53,7 @@ function createEmptyBasket() {
   emptyBasket.setAttribute("height", "300px");
 
   const emptyBasketImage = document.createElement("img");
-  emptyBasketImage.src = "src/assets/basket/cart.webp";
+  emptyBasketImage.src = "/basket/cart.webp";
   emptyBasketImage.classList.add("basket__image");
 
   const emptyBasketTitle = document.createElement("p");
@@ -436,7 +436,7 @@ function createSuccessfulOrder() {
   emptyBasket.setAttribute("height", "300px");
 
   const emptyBasketImage = document.createElement("img");
-  emptyBasketImage.src = "src/assets/basket/deliveryCar.gif";
+  emptyBasketImage.src = "/basket/deliveryCar.gif";
   emptyBasketImage.classList.add("basket__image");
 
   const emptyBasketTitle = document.createElement("p");

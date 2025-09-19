@@ -4,7 +4,7 @@
   min-width: 300px;
   width: 80%;
   max-width: 1200px;
-  background-color: #F6F6F9;
+  background-color: #f6f6f9;
   height: -moz-fit-content;
   height: fit-content;
   border-radius: 20px;
@@ -31,7 +31,7 @@
   overflow-y: auto;
   margin: 10px;
   height: 300px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,7 +41,7 @@
   width: 80%;
   margin: 10px;
   display: flex;
-  background-color: #F6F6F9;
+  background-color: #f6f6f9;
   flex-direction: column;
   max-height: 80vh;
   overflow-y: auto;
@@ -50,7 +50,7 @@
   padding: 10px;
 }
 .basket__field_fill {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   padding: 10px;
   border-radius: 10px;
 }
@@ -86,7 +86,7 @@
   padding: 8px 18px 10px;
 }
 .basket__btn-home:hover {
-  background-color: #B04DFD;
+  background-color: #b04dfd;
 }
 .basket__image {
   width: 72px;
@@ -117,10 +117,10 @@
   background-size: 20px;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(../assets/basket/delete.svg);
+  background-image: url(/public/basket/delete.svg);
 }
 .basket__cardDeletePhone:hover {
-  background-image: url(../assets/basket/delete_black.svg);
+  background-image: url(/public/basket/delete_black.svg);
 }
 .basket__cardFavoritePhone {
   display: none;
@@ -131,10 +131,10 @@
   background-repeat: no-repeat;
   background-size: 20px;
   background-position: center;
-  background-image: url(../assets/basket/favorite.svg);
+  background-image: url(/public/basket/favorite.svg);
 }
 .basket__cardFavoritePhone:hover {
-  background-image: url(../assets/basket/favorite_black.svg);
+  background-image: url(/public/basket/favorite_black.svg);
 }
 .basket__cardCountIcons {
   display: flex;
@@ -197,7 +197,7 @@
 }
 
 .btn__count:hover {
-  background-color: #E8E8F0;
+  background-color: #e8e8f0;
 }
 
 .cardCount {
@@ -257,10 +257,10 @@
     background-repeat: no-repeat;
     background-size: 20px;
     background-position: center;
-    background-image: url(../assets/basket/favorite.svg);
+    background-image: url(/public/basket/favorite.svg);
   }
   .basket__cardFavoriteLaptop:hover {
-    background-image: url(../assets/basket/favorite_black.svg);
+    background-image: url(/public/basket/favorite_black.svg);
   }
   .basket__cardDeleteLaptop {
     display: block;
@@ -271,9 +271,9 @@
     background-size: 20px;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url(../assets/basket/delete.svg);
+    background-image: url(/public/basket/delete.svg);
   }
   .basket__cardDeleteLaptop:hover {
-    background-image: url(../assets/basket/delete_black.svg);
+    background-image: url(/public/basket/delete_black.svg);
   }
 }/*# sourceMappingURL=basket.css.map */

@@ -1,8 +1,8 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "./",
+  base: "/Wildberries_Course_project/",
   build: {
-    outDir: "dist",
+    outDir: "docs",
   },
 });

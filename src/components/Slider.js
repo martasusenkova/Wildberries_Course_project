@@ -10,22 +10,22 @@ export function createSlider() {
   sliderWrapper.appendChild(sliderTrack);
 
   const imagesBig = [
-    "src/assets/slider_images/slider7_big.webp",
-    "src/assets/slider_images/slider1_big.webp",
-    "src/assets/slider_images/slider2_big.webp",
-    "src/assets/slider_images/slider3_big.webp",
-    "src/assets/slider_images/slider4_big.webp",
-    "src/assets/slider_images/slider5_big.webp",
-    "src/assets/slider_images/slider6_big.webp",
+    "/slider_images/slider7_big.webp",
+    "/slider_images/slider1_big.webp",
+    "/slider_images/slider2_big.webp",
+    "/slider_images/slider3_big.webp",
+    "/slider_images/slider4_big.webp",
+    "/slider_images/slider5_big.webp",
+    "/slider_images/slider6_big.webp",
   ];
   const imagesMedium = [
-    "src/assets/slider_images/slider7_medium.webp",
-    "src/assets/slider_images/slider1_medium.webp",
-    "src/assets/slider_images/slider2_medium.webp",
-    "src/assets/slider_images/slider3_medium.webp",
-    "src/assets/slider_images/slider4_medium.webp",
-    "src/assets/slider_images/slider5_medium.webp",
-    "src/assets/slider_images/slider6_medium.webp",
+    "/slider_images/slider7_medium.webp",
+    "/slider_images/slider1_medium.webp",
+    "/slider_images/slider2_medium.webp",
+    "/slider_images/slider3_medium.webp",
+    "/slider_images/slider4_medium.webp",
+    "/slider_images/slider5_medium.webp",
+    "/slider_images/slider6_medium.webp",
   ];
 
   let images = getResponsiveImages();

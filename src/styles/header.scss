@@ -19,7 +19,7 @@ header {
   }
 
   &__logo {
-    background-image: url(../assets/header-tab-svg/logoWb.svg);
+    background-image: url(/header-tab-svg/logoWb.svg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -32,7 +32,7 @@ header {
     display: none;
     height: 40px;
     background-color: transparent;
-    background-image: url(../assets/header-tab-svg/basket.svg);
+    background-image: url(/header-tab-svg/basket.svg);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -71,7 +71,7 @@ header {
   }
 
   &__logo {
-    background-image: url(../assets/header-tab-svg/logoWb.svg);
+    background-image: url(/header-tab-svg/logoWb.svg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -142,7 +142,7 @@ header {
     display: none;
     height: 40px;
     background-color: transparent;
-    background-image: url(../assets/header-tab-svg/basket.svg);
+    background-image: url(/header-tab-svg/basket.svg);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -199,27 +199,27 @@ header {
   &__home {
     width: 50px;
     background-color: transparent;
-    background-image: url(../assets/header-tab-svg/home-gray.svg);
+    background-image: url(/header-tab-svg/home-gray.svg);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 
     &:hover {
-      background-image: url(../assets/header-tab-svg/home-hover.svg);
+      background-image: url(/header-tab-svg/home-hover.svg);
     }
   }
 
   &__basket {
     width: 50px;
     background-color: transparent;
-    background-image: url(../assets/header-tab-svg/basket-gray.svg);
+    background-image: url(/header-tab-svg/basket-gray.svg);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     position: relative;
 
     &:hover {
-      background-image: url(../assets/header-tab-svg/basket-hover.svg);
+      background-image: url(/header-tab-svg/basket-hover.svg);
     }
   }
 }
