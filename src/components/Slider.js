@@ -10,7 +10,7 @@ export function createSlider() {
   sliderWrapper.appendChild(sliderTrack);
 
   const imagesBig = [
-    "/slider_images/slider7_big.webp",
+    "/Wildberries_Course_project/slider_images/slider7_big.webp",
     "/slider_images/slider1_big.webp",
     "/slider_images/slider2_big.webp",
     "/slider_images/slider3_big.webp",
